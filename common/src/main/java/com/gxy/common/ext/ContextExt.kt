@@ -1,4 +1,4 @@
-package com.gxy.owner.ext
+package com.gxy.common.ext
 
 import android.content.Context
 import android.graphics.Color

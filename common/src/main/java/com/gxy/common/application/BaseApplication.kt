@@ -1,4 +1,4 @@
-package com.gxy.owner.application
+package com.gxy.common.application
 
 import android.app.Application
 import androidx.lifecycle.ViewModelProvider

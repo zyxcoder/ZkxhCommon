@@ -1,9 +1,9 @@
-package com.gxy.owner.application
+package com.gxy.common.application
 
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.gxy.owner.common.loadsir.DefaultLoadingCallback
-import com.gxy.owner.common.loadsir.EmptyCallback
-import com.gxy.owner.common.loadsir.ErrorCallback
+import com.gxy.common.common.loadsir.DefaultLoadingCallback
+import com.gxy.common.common.loadsir.EmptyCallback
+import com.gxy.common.common.loadsir.ErrorCallback
 import com.kingja.loadsir.core.LoadSir
 
 

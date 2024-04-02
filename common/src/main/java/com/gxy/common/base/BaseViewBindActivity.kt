@@ -1,9 +1,9 @@
-package com.gxy.owner.base
+package com.gxy.common.base
 
 import android.os.Bundle
 import androidx.viewbinding.ViewBinding
-import com.gxy.owner.ext.dismissLoadingExt
-import com.gxy.owner.ext.showLoadingExt
+import com.gxy.common.ext.dismissLoadingExt
+import com.gxy.common.ext.showLoadingExt
 import com.gyf.immersionbar.ImmersionBar
 import com.zyxcoder.mvvmroot.base.activity.BaseVmVbActivity
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel

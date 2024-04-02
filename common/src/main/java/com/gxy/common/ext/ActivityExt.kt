@@ -1,4 +1,4 @@
-package com.gxy.owner.ext
+package com.gxy.common.ext
 
 import androidx.appcompat.app.AppCompatActivity
 import com.gxy.common.common.dialog.PhotoSelectedDialog

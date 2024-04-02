@@ -1,4 +1,4 @@
-package com.gxy.owner.view.refresh
+package com.gxy.common.view.refresh
 
 import android.annotation.SuppressLint
 import android.content.Context

@@ -1,7 +1,7 @@
-package com.gxy.owner.ext
+package com.gxy.common.ext
 
 import androidx.fragment.app.FragmentActivity
-import com.gxy.owner.common.dialog.LoadingDialog
+import com.gxy.common.common.dialog.LoadingDialog
 
 /**
  * Create by zyx_coder on 2023/1/10

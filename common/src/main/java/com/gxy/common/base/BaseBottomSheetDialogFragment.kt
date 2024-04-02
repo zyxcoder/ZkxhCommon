@@ -1,4 +1,4 @@
-package com.gxy.owner.base
+package com.gxy.common.base
 
 import android.graphics.Color
 import android.os.Bundle
@@ -12,8 +12,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.gxy.common.R
-import com.gxy.owner.utils.getScreenHeight
-import com.gxy.owner.utils.inflateBindingWithBottomSheetDialogFragmentGeneric
+import com.gxy.common.utils.getScreenHeight
+import com.gxy.common.utils.inflateBindingWithBottomSheetDialogFragmentGeneric
 
 /**
  * 通用BottomSheetDialogFragment

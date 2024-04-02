@@ -76,7 +76,7 @@
         android:background="@drawable/round_solid_white_8"
         app:layout_constraintTop_toBottomOf="@+id/ivHead">
 
-        <com.gxy.owner.view.CanEnterLayout
+        <com.gxy.common.view.CanEnterLayout
             android:id="@+id/clCompany"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
             app:can_enter_title_drawable="@drawable/ic_mime_company"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.gxy.owner.view.CanEnterLayout
+        <com.gxy.common.view.CanEnterLayout
             android:id="@+id/clUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
             app:can_enter_title_drawable="@drawable/ic_mime_user"
             app:layout_constraintTop_toBottomOf="@+id/clCompany" />
 
-        <com.gxy.owner.view.CanEnterLayout
+        <com.gxy.common.view.CanEnterLayout
             android:id="@+id/clSetting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

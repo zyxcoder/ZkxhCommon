@@ -1,4 +1,4 @@
-package com.gxy.owner.common.activitylist
+package com.gxy.common.common.activitylist
 
 import android.graphics.Color
 import android.os.Bundle
@@ -14,8 +14,8 @@ import com.google.android.material.tabs.TabLayout.Mode
 import com.gxy.common.R
 import com.gxy.common.databinding.ActivityBaseCommonListBinding
 import com.gxy.common.databinding.ItemTabCenterTextBinding
-import com.gxy.owner.base.BaseViewBindActivity
-import com.gxy.owner.common.adapter.SimpleFragmentPagerAdapter
+import com.gxy.common.base.BaseViewBindActivity
+import com.gxy.common.common.adapter.SimpleFragmentPagerAdapter
 
 /**
  * @author zhangyuxiang

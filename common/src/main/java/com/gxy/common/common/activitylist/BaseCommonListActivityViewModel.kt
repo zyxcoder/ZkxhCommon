@@ -1,4 +1,4 @@
-package com.gxy.owner.common.activitylist
+package com.gxy.common.common.activitylist
 
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 

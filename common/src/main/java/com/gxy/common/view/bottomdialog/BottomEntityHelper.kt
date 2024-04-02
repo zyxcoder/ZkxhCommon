@@ -1,6 +1,6 @@
-package com.gxy.owner.view.bottomdialog
+package com.gxy.common.view.bottomdialog
 
-import com.gxy.owner.entity.common.BottomListEntity
+import com.gxy.common.entity.common.BottomListEntity
 
 /**
  * @author zhangyuxiang

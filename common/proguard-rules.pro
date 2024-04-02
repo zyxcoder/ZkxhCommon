@@ -20,7 +20,7 @@
 ################common###############
 
  #实体类不参与混淆
--keep class com.gxy.owner.entity.**{*;}
+-keep class com.gxy.common.entity.**{*;}
 -keep class * implements android.os.Parcelable {
   public static final android.os.Parcelable$Creator *;
 }

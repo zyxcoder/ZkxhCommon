@@ -1,4 +1,4 @@
-package com.gxy.owner.view.bottomdialog
+package com.gxy.common.view.bottomdialog
 
 import android.content.Context
 import android.util.AttributeSet

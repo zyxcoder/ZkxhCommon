@@ -1,4 +1,4 @@
-package com.gxy.owner.common.loadsir
+package com.gxy.common.common.loadsir
 
 /**
  * @author zhangyuxiang

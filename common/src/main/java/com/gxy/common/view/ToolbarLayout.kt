@@ -1,4 +1,4 @@
-package com.gxy.owner.view
+package com.gxy.common.view
 
 import android.app.Activity
 import android.content.Context

@@ -1,13 +1,13 @@
-package com.gxy.owner.common.activitylist
+package com.gxy.common.common.activitylist
 
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.gxy.common.databinding.FragmentBaseCommonListBinding
-import com.gxy.owner.base.BaseViewBindFragment
-import com.gxy.owner.common.loadsir.getLoadSir
-import com.gxy.owner.common.loadsir.setLoadContentStatus
+import com.gxy.common.base.BaseViewBindFragment
+import com.gxy.common.common.loadsir.getLoadSir
+import com.gxy.common.common.loadsir.setLoadContentStatus
 import com.kingja.loadsir.core.LoadService
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 

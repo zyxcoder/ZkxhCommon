@@ -1,4 +1,4 @@
-package com.gxy.owner.utils
+package com.gxy.common.utils
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

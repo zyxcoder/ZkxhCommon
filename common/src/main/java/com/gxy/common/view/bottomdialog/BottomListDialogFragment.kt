@@ -1,12 +1,12 @@
-package com.gxy.owner.view.bottomdialog
+package com.gxy.common.view.bottomdialog
 
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gxy.common.databinding.DialogBottomSelectListBinding
-import com.gxy.owner.base.BaseBottomSheetDialogFragment
-import com.gxy.owner.entity.common.BottomListEntity
+import com.gxy.common.base.BaseBottomSheetDialogFragment
+import com.gxy.common.entity.common.BottomListEntity
 import com.zyxcoder.mvvmroot.ext.put
 
 /**

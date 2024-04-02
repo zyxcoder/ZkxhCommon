@@ -1,9 +1,9 @@
-package com.gxy.owner.view.bottomdialog
+package com.gxy.common.view.bottomdialog
 
 import androidx.core.content.ContextCompat
 import com.gxy.common.R
 import com.gxy.common.databinding.ItemBottomSelectListBinding
-import com.gxy.owner.entity.common.BottomListEntity
+import com.gxy.common.entity.common.BottomListEntity
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
 

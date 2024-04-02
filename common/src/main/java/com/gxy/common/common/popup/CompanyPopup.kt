@@ -1,4 +1,4 @@
-package com.gxy.owner.common.popup
+package com.gxy.common.common.popup
 
 import android.content.Context
 import android.view.View
@@ -6,8 +6,8 @@ import android.view.animation.AnimationUtils
 import androidx.core.view.isInvisible
 import com.gxy.common.R
 import com.gxy.common.databinding.PopupCompanyBinding
-import com.gxy.owner.common.adapter.CompanyAdapter
-import com.gxy.owner.entity.common.CompanyEntity
+import com.gxy.common.common.adapter.CompanyAdapter
+import com.gxy.common.entity.common.CompanyEntity
 import razerdp.basepopup.BasePopupWindow
 
 /**

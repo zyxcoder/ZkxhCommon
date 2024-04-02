@@ -1,4 +1,4 @@
-package com.gxy.owner.common.loadsir
+package com.gxy.common.common.loadsir
 
 import com.gxy.common.R
 import com.kingja.loadsir.callback.Callback

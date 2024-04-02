@@ -1,8 +1,8 @@
-package com.gxy.owner.common.activitylist
+package com.gxy.common.common.activitylist
 
 import androidx.lifecycle.MutableLiveData
-import com.gxy.owner.common.loadsir.LoadContentStatus
-import com.gxy.owner.network.api.ApiResult
+import com.gxy.common.common.loadsir.LoadContentStatus
+import com.gxy.common.network.api.ApiResult
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 import com.zyxcoder.mvvmroot.ext.request
 import kotlinx.coroutines.Job

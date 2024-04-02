@@ -1,4 +1,4 @@
-package com.gxy.owner.entity.common
+package com.gxy.common.entity.common
 
 import androidx.annotation.Keep
 import kotlinx.parcelize.Parcelize

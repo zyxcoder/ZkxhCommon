@@ -1,4 +1,4 @@
-package com.gxy.owner.network.api
+package com.gxy.common.network.api
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName

@@ -1,4 +1,4 @@
-package com.gxy.owner.common.adapter
+package com.gxy.common.common.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

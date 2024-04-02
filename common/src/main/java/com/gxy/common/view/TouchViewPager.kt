@@ -1,4 +1,4 @@
-package com.gxy.owner.view
+package com.gxy.common.view
 
 import android.annotation.SuppressLint
 import android.content.Context

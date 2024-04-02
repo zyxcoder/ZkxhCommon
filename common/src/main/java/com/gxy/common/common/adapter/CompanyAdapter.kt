@@ -1,8 +1,8 @@
-package com.gxy.owner.common.adapter
+package com.gxy.common.common.adapter
 
 import com.gxy.common.R
 import com.gxy.common.databinding.ItemCompanyBinding
-import com.gxy.owner.entity.common.CompanyEntity
+import com.gxy.common.entity.common.CompanyEntity
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
 

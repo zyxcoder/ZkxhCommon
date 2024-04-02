@@ -1,4 +1,4 @@
-package com.gxy.owner.common.dialog
+package com.gxy.common.common.dialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable

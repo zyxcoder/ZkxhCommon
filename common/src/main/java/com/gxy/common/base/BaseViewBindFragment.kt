@@ -1,8 +1,8 @@
-package com.gxy.owner.base
+package com.gxy.common.base
 
 import androidx.viewbinding.ViewBinding
-import com.gxy.owner.ext.dismissLoadingExt
-import com.gxy.owner.ext.showLoadingExt
+import com.gxy.common.ext.dismissLoadingExt
+import com.gxy.common.ext.showLoadingExt
 import com.zyxcoder.mvvmroot.base.fragment.BaseVmVbFragment
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
 

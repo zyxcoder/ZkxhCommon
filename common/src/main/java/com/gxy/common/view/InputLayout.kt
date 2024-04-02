@@ -1,4 +1,4 @@
-package com.gxy.owner.view
+package com.gxy.common.view
 
 import android.content.Context
 import android.text.InputType
@@ -12,8 +12,8 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentManager
 import com.gxy.common.R
 import com.gxy.common.databinding.ViewInputBinding
-import com.gxy.owner.entity.common.BottomListEntity
-import com.gxy.owner.view.bottomdialog.BottomListDialogFragment
+import com.gxy.common.entity.common.BottomListEntity
+import com.gxy.common.view.bottomdialog.BottomListDialogFragment
 import com.zyxcoder.mvvmroot.ext.showToast
 
 /**

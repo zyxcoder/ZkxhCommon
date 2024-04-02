@@ -1,4 +1,4 @@
-package com.gxy.owner.base
+package com.gxy.common.base
 
 import android.app.Dialog
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.FragmentManager
 import com.gxy.common.R
-import com.gxy.owner.utils.getScreenHeight
-import com.gxy.owner.utils.getScreenWidth
+import com.gxy.common.utils.getScreenHeight
+import com.gxy.common.utils.getScreenWidth
 
 open class BaseCenterInDialogFragment : AppCompatDialogFragment() {
 

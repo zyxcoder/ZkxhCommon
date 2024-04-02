@@ -1,6 +1,6 @@
-package com.gxy.owner.ext
+package com.gxy.common.ext
 
-import com.gxy.owner.entity.common.BottomListEntity
+import com.gxy.common.entity.common.BottomListEntity
 
 /**
  * @author zhangyuxiang

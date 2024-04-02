@@ -1,4 +1,4 @@
-package com.gxy.owner.common.dialog
+package com.gxy.common.common.dialog
 
 import android.content.Context
 import android.os.Bundle
