@@ -33,7 +33,11 @@ class BottomListDialogFragment : BaseBottomSheetDialogFragment<DialogBottomSelec
             return BottomListDialogFragment().apply {
                 arguments = Bundle().apply {
                     put(DIALOG_TITLE, dialogTitle)
-                    put(IS_SHOW_SEARCH_BOX, isShowSearchBox)
+                    put(
+                        IS_SHOW_SEARCH_BOX,
+                        //超过20条数据自动展示搜索框
+                        isShowSearchBox == true || ((dialogListInfo?.size ?: 0) >= 20)
+                    )
                 }
             }
         }
