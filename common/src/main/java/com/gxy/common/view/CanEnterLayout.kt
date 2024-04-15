@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.gxy.common.R
 import com.gxy.common.databinding.ViewCanEnterBinding
+import com.zyxcoder.mvvmroot.ext.onContinuousClick
 
 /**
  * @author zhangyuxiang
@@ -27,7 +28,7 @@ class CanEnterLayout constructor(
             tvTag.text = attr.getString(R.styleable.CanEnterLayout_can_enter_title_content)
             viewLineTag.isVisible =
                 attr.getBoolean(R.styleable.CanEnterLayout_can_enter_needViewLine, true)
-            clRoot.setOnClickListener {
+            clRoot.onContinuousClick {
                 onClickListener?.invoke()
             }
         }
