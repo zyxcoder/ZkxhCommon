@@ -179,3 +179,10 @@
 -keep class com.kingja.loadsir.** {*;}
 
 -keep class com.luck.picture.lib.** { *; }
+
+
+################ LiveEventBus ###############
+-dontwarn com.jeremyliao.liveeventbus.**
+-keep class com.jeremyliao.liveeventbus.** { *; }
+-keep class androidx.lifecycle.** { *; }
+-keep class androidx.arch.core.** { *; }

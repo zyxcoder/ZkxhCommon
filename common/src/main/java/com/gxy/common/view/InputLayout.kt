@@ -14,6 +14,7 @@ import com.gxy.common.R
 import com.gxy.common.databinding.ViewInputBinding
 import com.gxy.common.entity.common.BottomListEntity
 import com.gxy.common.view.bottomdialog.BottomListDialogFragment
+import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 
 /**
@@ -42,7 +43,10 @@ class InputLayout(
             tvStar.isVisible = attr.getBoolean(R.styleable.InputLayout_is_requireds, false)
             val isCanInput = attr.getBoolean(R.styleable.InputLayout_is_input, false)
             val isShowEnter = attr.getBoolean(R.styleable.InputLayout_is_show_enter, true)
+            val isShowBottomLine =
+                attr.getBoolean(R.styleable.InputLayout_is_show_bottom_line, true)
 
+            viewLine.isVisible = isShowBottomLine
             if (isShowEnter) {
                 groupName.isVisible = isCanInput.not()
             } else {
@@ -63,6 +67,14 @@ class InputLayout(
                     if (selectContent.isNullOrEmpty()) R.color.color_BCBCBD else R.color.color_333333
                 )
             )
+            tvMessage.setTextColor(
+                ContextCompat.getColor(
+                    context, if (attr.getBoolean(
+                            R.styleable.InputLayout_editTextCanEdit, true
+                        )
+                    ) R.color.color_333333 else R.color.color_black_999999
+                )
+            )
             tvUnit.isVisible = attr.getBoolean(R.styleable.InputLayout_hase_unit, false)
             tvUnit.text = attr.getString(R.styleable.InputLayout_unit_content)
             //默认需要展示底部弹窗
@@ -70,7 +82,7 @@ class InputLayout(
                 attr.getBoolean(R.styleable.InputLayout_is_need_show_bottom_dialog, true)
             val isShowSearchBox = attr.getBoolean(R.styleable.InputLayout_show_search_box, false)
             if (!isCanInput && isNeedShowBottomDialog) {
-                clRoot.setOnClickListener {
+                clRoot.onContinuousClick {
                     showBottomDialog(
                         (context as? AppCompatActivity)?.supportFragmentManager, isShowSearchBox
                     )
@@ -80,6 +92,11 @@ class InputLayout(
             etName.isFocusable = attr.getBoolean(R.styleable.InputLayout_editTextCanEdit, true)
             etName.isFocusableInTouchMode =
                 attr.getBoolean(R.styleable.InputLayout_editTextCanEdit, true)
+            mBinding.etName.setTextColor(
+                ContextCompat.getColor(
+                    context, if (attr.getBoolean(R.styleable.InputLayout_editTextCanEdit, true)) R.color.color_333333 else R.color.color_black_999999
+                )
+            )
             etName.doAfterTextChanged {
                 onInputChangeListener?.invoke(it.toString())
             }
@@ -88,11 +105,95 @@ class InputLayout(
     }
 
     /**
+     * 初始化布局，主要用于Table初始化
+     * @param inputType 输入类型
+     * @param isRequireds 是否必填
+     * @param isCanInput 是否可输入
+     * @param isShowEnter  是否展示进入图标
+     * @param inputType 输入类型
+     * @param hintContent 提示词
+     * @param selectContent 选中的文案
+     * @param haseUnit 是否有单位
+     * @param unitContent 单位
+     * @param isNeedShowBottomDialog 点击是否弹出底部弹窗
+     * @param isShowSearchBox 底部弹窗是否需要展示搜索框
+     * @param isCanEdit 是否可编辑
+     */
+    fun initInputLayout(
+        title: String? = null,
+        isRequireds: Boolean = false,
+        isCanInput: Boolean = false,
+        isShowEnter: Boolean = true,
+        inputType: Int? = null,
+        hintContent: String? = null,
+        selectContent: String? = null,
+        haseUnit: Boolean = false,
+        unitContent: String? = null,
+        isNeedShowBottomDialog: Boolean = true,
+        isShowSearchBox: Boolean = false,
+        isCanEdit: Boolean = true,
+        isShowBottomLine: Boolean = true
+    ) {
+        mBinding.apply {
+            post {
+                tvTitle.text = title
+                tvStar.isVisible = isRequireds
+                viewLine.isVisible = isShowBottomLine
+                if (isShowEnter) {
+                    groupName.isVisible = isCanInput.not()
+                } else {
+                    groupName.visibility = GONE
+                    tvMessage.visibility = VISIBLE
+                }
+                etName.isVisible = isCanInput
+                etName.inputType = inputType ?: InputType.TYPE_CLASS_TEXT
+                etName.hint = hintContent
+                tvName.text = if (selectContent.isNullOrEmpty()) hintContent else selectContent
+                tvName.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        if (selectContent.isNullOrEmpty()) R.color.color_BCBCBD else R.color.color_333333
+                    )
+                )
+                tvMessage.setTextColor(
+                    ContextCompat.getColor(
+                        context, if (isCanEdit) R.color.color_333333 else R.color.color_black_999999
+                    )
+                )
+                tvUnit.isVisible = haseUnit
+                tvUnit.text = unitContent
+                //默认需要展示底部弹窗
+                if (!isCanInput && isNeedShowBottomDialog) {
+                    clRoot.onContinuousClick {
+                        showBottomDialog(
+                            (context as? AppCompatActivity)?.supportFragmentManager, isShowSearchBox
+                        )
+                    }
+                }
+                //设置EditText能否编辑
+                setEditTextCanEdit(isCanEdit)
+            }
+        }
+    }
+
+    /**
+     * 设置标题名称
+     */
+    fun setTitle(title: String?) {
+        mBinding.tvTitle.text = title
+    }
+
+    /**
      * 设置EditText是否可编辑
      */
     fun setEditTextCanEdit(isCanEdit: Boolean) {
         mBinding.etName.isFocusable = isCanEdit
         mBinding.etName.isFocusableInTouchMode = isCanEdit
+        mBinding.etName.setTextColor(
+            ContextCompat.getColor(
+                context, if (isCanEdit) R.color.color_333333 else R.color.color_black_999999
+            )
+        )
         if (!isCanEdit) {
             mBinding.tvStar.isVisible = false
         }
@@ -103,6 +204,7 @@ class InputLayout(
     }
 
     fun setSelectText(content: String?, tag: Int? = null) {
+        contentTag = tag
         mBinding.tvName.text = if (content.isNullOrEmpty()) hintContent else content
         mBinding.tvName.setTextColor(
             ContextCompat.getColor(
@@ -110,7 +212,6 @@ class InputLayout(
             )
         )
         mBinding.etName.setText(content)
-        contentTag = tag
     }
 
     fun getContent(): String? {

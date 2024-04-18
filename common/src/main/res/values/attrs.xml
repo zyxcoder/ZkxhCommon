@@ -73,6 +73,7 @@
         <attr name="show_search_box" format="boolean"/>
         <attr name="editTextCanEdit" format="boolean"/>
         <attr name="is_show_enter" format="boolean"/>
+        <attr name="is_show_bottom_line" format="boolean"/>
         <attr name="android:inputType"/>
     </declare-styleable>
 
@@ -87,6 +88,7 @@
     </declare-styleable>
 
     <declare-styleable name="CheckLayout">
+        <attr name="is_show_requireds" format="boolean" />
         <attr name="check_yes" format="boolean"/>
         <attr name="checklayout_title" format="string"/>
     </declare-styleable>
@@ -135,5 +137,17 @@
         <attr name="bottomDialogTextViewTitle" format="string" />
         <attr name="bottomDialogTextViewDialogTitle" format="string" />
         <attr name="bottomDialogTextViewShowSearchBox" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="MoneyLayout">
+        <attr name="moneyLayoutTitle" format="string" />
+        <attr name="moneyLayoutContent" format="float" />
+        <attr name="moneyLayoutHint" format="string" />
+        <attr name="moneyLayoutIsRequireds" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SelectTimeLayout">
+        <attr name="selectTimeLayoutTitle" format="string" />
+        <attr name="selectTimeLayoutNeedViewLine" format="boolean"/>
+        <attr name="selectTimeLayoutIsRequireds" format="boolean" />
     </declare-styleable>
 </resources>

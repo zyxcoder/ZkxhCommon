@@ -285,4 +285,16 @@
     <string name="please_input_quota">请输入配额</string>
     <string name="shipped_traffic">已发货量</string>
     <string name="record_user">录单人：A</string>
+    <string name="receivable_amount">收款金额</string>
+    <string name="please_input_receivable_amount">请输入收款金额</string>
+    <string name="null_money">零元</string>
+    <string name="start_time">起始时间</string>
+    <string name="end_time">结束时间</string>
+    <string name="unit">至</string>
+    <string name="please_select_start_time">请选择起始时间</string>
+    <string name="please_select_end_time">请选择结束时间</string>
+    <string name="unloading_time">卸货时间</string>
+    <string name="receive_num">收款单号：A</string>
+    <string name="please_input">请输入</string>
+    <string name="please_select">请选择</string>
 </resources>
