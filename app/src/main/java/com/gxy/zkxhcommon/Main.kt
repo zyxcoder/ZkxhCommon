@@ -3,12 +3,14 @@ package com.gxy.zkxhcommon
 import android.os.Bundle
 import com.gxy.common.common.table.BaseTableActivity
 import com.gxy.common.databinding.ActivityBaseTableBinding
+import com.gxy.common.entity.common.CardIdItemEntity
 import com.gxy.common.entity.common.GroupTableEntity
 import com.gxy.common.entity.common.IconTitleItemEntity
 import com.gxy.common.entity.common.InputItemEntity
 import com.gxy.common.entity.common.InputLayoutType
 import com.gxy.common.entity.common.SelectTimeItemEntity
 import com.gxy.common.entity.common.TxtItemEntity
+import com.zyxcoder.mvvmroot.ext.showToast
 
 /**
  * @author zhangyuxiang
@@ -30,6 +32,9 @@ class Main : BaseTableActivity<MainViewModel, ActivityBaseTableBinding>() {
                     tables = arrayListOf(
                         IconTitleItemEntity("合同号"),
                         TxtItemEntity("测试"),
+                        CardIdItemEntity(
+
+                        ),
                         InputItemEntity(
                             lableName = "采购",
                             isRequireds = true,
@@ -71,5 +76,13 @@ class Main : BaseTableActivity<MainViewModel, ActivityBaseTableBinding>() {
                 )
             )
         )
+    }
+
+    override var provideUpLoadReverseSidePicClickListener: ((data: CardIdItemEntity) -> Unit)? = {
+        showToast("反面")
+    }
+
+    override var provideUpLoadRightSidePicClickListener: ((data: CardIdItemEntity) -> Unit)? = {
+        showToast("正面")
     }
 }

@@ -1,9 +1,12 @@
 package com.gxy.common.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.gxy.common.R
 import com.gxy.common.databinding.ViewSelectTimeBinding
@@ -16,6 +19,7 @@ import com.zyxcoder.mvvmroot.ext.showToast
  * @author zhangyuxiang
  * @date 2024/4/15
  */
+@SuppressLint("ResourceAsColor", "ResourceType")
 class SelectTimeLayout(
     context: Context, attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
@@ -52,6 +56,17 @@ class SelectTimeLayout(
                     onSelectEndTimeClickListener?.invoke(endDate)
                 }
             }
+            arrayListOf(tvStartTime, tvEndTime).forEach {
+                it.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        attr.getColor(
+                            R.styleable.SelectTimeLayout_selectTimeLayoutSelectColor,
+                            R.color.color_333333
+                        )
+                    )
+                )
+            }
         }
         attr.recycle()
     }
@@ -64,7 +79,8 @@ class SelectTimeLayout(
         isNeedViewLine: Boolean?,
         isRequireds: Boolean?,
         startTime: String?,
-        endTime: String?
+        endTime: String?,
+        @ColorInt selectColor: Int = R.color.color_333333
     ) {
         mBinding.apply {
             tvTitle.text = title
@@ -72,6 +88,9 @@ class SelectTimeLayout(
             tvStar.isVisible = isRequireds ?: true
             tvStartTime.text = startTime
             tvEndTime.text = endTime
+            arrayListOf(tvStartTime, tvEndTime).forEach {
+                it.setTextColor(ContextCompat.getColor(context, selectColor))
+            }
         }
     }
 

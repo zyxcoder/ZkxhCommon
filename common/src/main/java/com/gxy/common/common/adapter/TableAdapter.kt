@@ -1,6 +1,7 @@
 package com.gxy.common.common.adapter
 
 import com.chad.library.adapter.base.BaseBinderAdapter
+import com.gxy.common.common.providers.CardIdBinder
 import com.gxy.common.entity.common.CheckItemEntity
 import com.gxy.common.entity.common.DialogSelectItemEntity
 import com.gxy.common.entity.common.FileItemEntity
@@ -18,13 +19,18 @@ import com.gxy.common.common.providers.MoneyBinder
 import com.gxy.common.common.providers.SelectTimeBinder
 import com.gxy.common.common.providers.TitleBinder
 import com.gxy.common.common.providers.TxtBinder
+import com.gxy.common.entity.common.CardIdItemEntity
 import com.gxy.common.entity.common.IconTitleItemEntity
 
 /**
  * @author zhangyuxiang
  * @date 2024/4/10
  */
-class TableAdapter(onUploadFileClickListener: (() -> Unit)? = null) : BaseBinderAdapter() {
+class TableAdapter(
+    onUploadFileClickListener: (() -> Unit)? = null,
+    onUpLoadRightSidePic: ((data: CardIdItemEntity) -> Unit)? = null,
+    onUpLoadReverseSidePic: ((data: CardIdItemEntity) -> Unit)? = null
+) : BaseBinderAdapter() {
     init {
         addItemBinder(InputItemEntity::class.java, InputBinder())
         addItemBinder(CheckItemEntity::class.java, CheckBinder())
@@ -35,5 +41,12 @@ class TableAdapter(onUploadFileClickListener: (() -> Unit)? = null) : BaseBinder
         addItemBinder(TxtItemEntity::class.java, TxtBinder())
         addItemBinder(SelectTimeItemEntity::class.java, SelectTimeBinder())
         addItemBinder(IconTitleItemEntity::class.java, IconTittleBinder())
+        addItemBinder(
+            CardIdItemEntity::class.java,
+            CardIdBinder(
+                onUpLoadRightSidePic = onUpLoadRightSidePic,
+                onUpLoadReverseSidePic = onUpLoadReverseSidePic
+            )
+        )
     }
 }

@@ -149,5 +149,6 @@
         <attr name="selectTimeLayoutTitle" format="string" />
         <attr name="selectTimeLayoutNeedViewLine" format="boolean"/>
         <attr name="selectTimeLayoutIsRequireds" format="boolean" />
+        <attr name="selectTimeLayoutSelectColor" format="reference|color"/>
     </declare-styleable>
 </resources>

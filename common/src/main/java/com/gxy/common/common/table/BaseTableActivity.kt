@@ -8,6 +8,7 @@ import com.gxy.common.R
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.common.adapter.GroupTableAdapter
 import com.gxy.common.databinding.ActivityBaseTableBinding
+import com.gxy.common.entity.common.CardIdItemEntity
 import com.gxy.common.entity.common.CheckItemEntity
 import com.gxy.common.entity.common.DialogSelectItemEntity
 import com.gxy.common.entity.common.FileItemEntity
@@ -42,6 +43,12 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
             grouTableAdapter = GroupTableAdapter().apply {
                 onUploadFileClickListener = {
                     provideFileUploadClickListener?.invoke()
+                }
+                onUpLoadReverseSidePic = {
+                    provideUpLoadReverseSidePicClickListener?.invoke(it)
+                }
+                onUpLoadRightSidePic = {
+                    provideUpLoadRightSidePicClickListener?.invoke(it)
                 }
                 rvTable.adapter = this
             }
@@ -124,6 +131,18 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
     protected open var provideFileUploadClickListener: (() -> Unit)? = null
 
     /**
+     * 驾驶证正面上传
+     */
+    protected open var provideUpLoadRightSidePicClickListener: ((data: CardIdItemEntity) -> Unit)? =
+        null
+
+    /**
+     * 驾驶证反面上传
+     */
+    protected open var provideUpLoadReverseSidePicClickListener: ((data: CardIdItemEntity) -> Unit)? =
+        null
+
+    /**
      * 必填标志是否显示
      */
     protected open var provideStarTagIsVisibility: Boolean = true
@@ -188,6 +207,19 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
                                 }
                             }
                         }
+
+                        is CardIdItemEntity -> {
+                            if (itemEntity.isRequireds == true) {
+                                if (itemEntity.rightCradImageUrl == null) {
+                                    showToast(R.string.please_post_card_right_side)
+                                    return false
+                                }
+                                if (itemEntity.reverseCradImageUrl == null) {
+                                    showToast(R.string.please_post_card_reverse_side)
+                                    return false
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -205,6 +237,11 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
                     //选择时间特殊判断
                     uploadMap[serverKeyInner.startTimePostServerKey] = serverKeyInner.startTime
                     uploadMap[serverKeyInner.endTimePostServerKey] = serverKeyInner.endTime
+                } else if (serverKeyInner is CardIdItemEntity) {
+                    //上传驾驶证特殊判断
+                    uploadMap[serverKeyInner.postRightServerKey] = serverKeyInner.rightCradImageUrl
+                    uploadMap[serverKeyInner.postReverseServerKey] =
+                        serverKeyInner.reverseCradImageUrl
                 } else {
                     uploadMap[serverKeyInner?.getServerKey()] = serverKeyInner?.getServerValue()
                 }

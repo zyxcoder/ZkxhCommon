@@ -1,5 +1,6 @@
 package com.gxy.common.entity.common
 
+import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.Keep
 import com.gxy.common.R
@@ -140,7 +141,8 @@ data class SelectTimeItemEntity(
     val isRequireds: Boolean? = false,
     val isShowBottomLine: Boolean? = false,
     val startTimePostServerKey: String? = null,
-    val endTimePostServerKey: String? = null
+    val endTimePostServerKey: String? = null,
+    @ColorInt val selectColor: Int = R.color.color_333333
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = arrayListOf(startTime, endTime)
@@ -158,3 +160,17 @@ data class IconTitleItemEntity(
     override fun getServerValue() = lableValue
 }
 
+@Keep
+data class CardIdItemEntity(
+    val isRequireds: Boolean? = false,
+    val postRightServerKey: String? = null,
+    val postReverseServerKey: String? = null,
+    val rightCradImageUrl: String? = null,
+    val reverseCradImageUrl: String? = null
+) : ServerKeyInner {
+    //特殊处理ServerKey
+    override fun getServerKey() = ""
+
+    override fun getServerValue() = arrayListOf(rightCradImageUrl, reverseCradImageUrl)
+
+}

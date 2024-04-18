@@ -2,6 +2,7 @@ package com.gxy.common.common.adapter
 
 import com.gxy.common.R
 import com.gxy.common.databinding.ItemTableBinding
+import com.gxy.common.entity.common.CardIdItemEntity
 import com.gxy.common.entity.common.GroupTableEntity
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingAdapter
 import com.zyxcoder.mvvmroot.base.adapter.BaseViewBindingHolder
@@ -15,9 +16,15 @@ class GroupTableAdapter : BaseViewBindingAdapter<GroupTableEntity, ItemTableBind
     ItemTableBinding::inflate, R.layout.item_table
 ) {
     var onUploadFileClickListener: (() -> Unit)? = null
+    var onUpLoadRightSidePic: ((data: CardIdItemEntity) -> Unit)? = null
+    var onUpLoadReverseSidePic: ((data: CardIdItemEntity) -> Unit)? = null
     override fun convert(holder: BaseViewBindingHolder<ItemTableBinding>, item: GroupTableEntity) {
         holder.viewBind.apply {
-            TableAdapter(onUploadFileClickListener).apply {
+            TableAdapter(
+                onUploadFileClickListener,
+                onUpLoadRightSidePic,
+                onUpLoadReverseSidePic
+            ).apply {
                 rvTable.adapter = this
                 setNewInstance(item.tables.toMutableList())
             }

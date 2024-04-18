@@ -297,4 +297,11 @@
     <string name="receive_num">收款单号：A</string>
     <string name="please_input">请输入</string>
     <string name="please_select">请选择</string>
+    <string name="id_card_desc">扫描驾驶证后自动录入身份信息</string>
+    <string name="card_right_side">驾驶证正面</string>
+    <string name="card_reverse_side">驾驶证反面</string>
+    <string name="post_card_right_side">上传驾驶证的人像面</string>
+    <string name="post_card_reverse_side">上传驾驶证的反面</string>
+    <string name="please_post_card_right_side">请上传驾驶证正面</string>
+    <string name="please_post_card_reverse_side">请上传驾驶证反面</string>
 </resources>

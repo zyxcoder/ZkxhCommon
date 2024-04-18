@@ -23,7 +23,8 @@ class SelectTimeBinder :
                 isRequireds = data.isRequireds ?: false,
                 isNeedViewLine = data.isShowBottomLine ?: false,
                 startTime = data.startTime,
-                endTime = data.endTime
+                endTime = data.endTime,
+                selectColor = data.selectColor
             )
             onSelectStartTimeClickListener = {
                 ((adapter.recyclerView.parent.parent as? RecyclerView)?.adapter as? GroupTableAdapter)?.data?.firstOrNull {
