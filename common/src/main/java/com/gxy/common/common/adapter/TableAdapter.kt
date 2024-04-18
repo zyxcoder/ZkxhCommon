@@ -12,11 +12,13 @@ import com.gxy.common.entity.common.TxtItemEntity
 import com.gxy.common.common.providers.CheckBinder
 import com.gxy.common.common.providers.DialogSelectBinder
 import com.gxy.common.common.providers.FileBinder
+import com.gxy.common.common.providers.IconTittleBinder
 import com.gxy.common.common.providers.InputBinder
 import com.gxy.common.common.providers.MoneyBinder
 import com.gxy.common.common.providers.SelectTimeBinder
 import com.gxy.common.common.providers.TitleBinder
 import com.gxy.common.common.providers.TxtBinder
+import com.gxy.common.entity.common.IconTitleItemEntity
 
 /**
  * @author zhangyuxiang
@@ -32,5 +34,6 @@ class TableAdapter(onUploadFileClickListener: (() -> Unit)? = null) : BaseBinder
         addItemBinder(MoneyItemEntity::class.java, MoneyBinder())
         addItemBinder(TxtItemEntity::class.java, TxtBinder())
         addItemBinder(SelectTimeItemEntity::class.java, SelectTimeBinder())
+        addItemBinder(IconTitleItemEntity::class.java, IconTittleBinder())
     }
 }

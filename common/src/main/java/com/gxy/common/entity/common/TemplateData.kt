@@ -3,7 +3,7 @@ package com.gxy.common.entity.common
 import androidx.annotation.DrawableRes
 import androidx.annotation.Keep
 import com.gxy.common.R
-import com.gxy.owner.common.providers.inter.ServerKeyInner
+import com.gxy.common.common.providers.inter.ServerKeyInner
 
 /**
  * @author zhangyuxiang
@@ -145,3 +145,16 @@ data class SelectTimeItemEntity(
     override fun getServerKey() = postServerKey
     override fun getServerValue() = arrayListOf(startTime, endTime)
 }
+
+@Keep
+data class IconTitleItemEntity(
+    val lableName: String?,
+    var lableValue: String? = "",
+    @DrawableRes val iconRes: Int? = R.drawable.ic_contract_num,
+    val postServerKey: String? = null,
+    val isShowBottomLine: Boolean = true,
+) : ServerKeyInner {
+    override fun getServerKey() = postServerKey
+    override fun getServerValue() = lableValue
+}
+

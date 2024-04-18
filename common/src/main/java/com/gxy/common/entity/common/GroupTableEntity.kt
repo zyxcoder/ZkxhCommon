@@ -1,7 +1,7 @@
 package com.gxy.common.entity.common
 
 import androidx.annotation.Keep
-import com.gxy.owner.common.providers.inter.ServerKeyInner
+import com.gxy.common.common.providers.inter.ServerKeyInner
 
 /**
  * @author zhangyuxiang

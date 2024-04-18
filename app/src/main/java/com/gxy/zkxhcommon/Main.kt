@@ -4,9 +4,11 @@ import android.os.Bundle
 import com.gxy.common.common.table.BaseTableActivity
 import com.gxy.common.databinding.ActivityBaseTableBinding
 import com.gxy.common.entity.common.GroupTableEntity
+import com.gxy.common.entity.common.IconTitleItemEntity
 import com.gxy.common.entity.common.InputItemEntity
 import com.gxy.common.entity.common.InputLayoutType
 import com.gxy.common.entity.common.SelectTimeItemEntity
+import com.gxy.common.entity.common.TxtItemEntity
 
 /**
  * @author zhangyuxiang
@@ -26,6 +28,8 @@ class Main : BaseTableActivity<MainViewModel, ActivityBaseTableBinding>() {
             arrayListOf(
                 GroupTableEntity(
                     tables = arrayListOf(
+                        IconTitleItemEntity("合同号"),
+                        TxtItemEntity("测试"),
                         InputItemEntity(
                             lableName = "采购",
                             isRequireds = true,

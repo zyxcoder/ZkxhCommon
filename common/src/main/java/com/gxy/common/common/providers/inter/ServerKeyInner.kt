@@ -1,4 +1,4 @@
-package com.gxy.owner.common.providers.inter
+package com.gxy.common.common.providers.inter
 
 /**
  * @author zhangyuxiang
