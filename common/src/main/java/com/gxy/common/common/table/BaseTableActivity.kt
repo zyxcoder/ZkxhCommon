@@ -2,6 +2,7 @@ package com.gxy.common.common.table
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.core.text.parseAsHtml
 import androidx.core.view.isVisible
 import com.gxy.common.R
@@ -41,14 +42,14 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
             btSave.text = provideSubmitContent()
             btSaveBottom.text = provideSubmitContent()
             grouTableAdapter = GroupTableAdapter().apply {
-                onUploadFileClickListener = {
-                    provideFileUploadClickListener?.invoke()
+                onUploadFileClickListener = { ivHodler ->
+                    provideFileUploadClickListener?.invoke(ivHodler)
                 }
-                onUpLoadReverseSidePic = {
-                    provideUpLoadReverseSidePicClickListener?.invoke(it)
+                onUpLoadReverseSidePic = { data, ivHodler ->
+                    provideUpLoadReverseSidePicClickListener?.invoke(data, ivHodler)
                 }
-                onUpLoadRightSidePic = {
-                    provideUpLoadRightSidePicClickListener?.invoke(it)
+                onUpLoadRightSidePic = { data, ivHodler ->
+                    provideUpLoadRightSidePicClickListener?.invoke(data, ivHodler)
                 }
                 rvTable.adapter = this
             }
@@ -69,10 +70,10 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
     private fun handleSumbit() {
         val uploadMap = getAllParamsFromAdapter()
         Log.d("提交结果", uploadMap.toString())
-        if (handleSubmitBySelf) {
+        if (handleSubmitBySelf()) {
             handleSubmitOperation(uploadMap)
         } else {
-            if (provideIsAddOrModify) {
+            if (provideIsAddOrModify()) {
                 mViewModel.insertUserData(uploadMap)
             } else {
                 mViewModel.updateUserData(uploadMap)
@@ -94,12 +95,12 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
      * 这个页面是新增还是编辑页面
      * true表示新增，false表示编辑
      */
-    protected abstract var provideIsAddOrModify: Boolean
+    protected abstract fun provideIsAddOrModify(): Boolean
 
     /**
      * 自己处理提交逻辑
      */
-    protected abstract var handleSubmitBySelf: Boolean
+    protected abstract fun handleSubmitBySelf(): Boolean
 
     /**
      * 自己处理提交操作的回调方法
@@ -128,18 +129,18 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
     /**
      * 文件上传交由各自activity实现
      */
-    protected open var provideFileUploadClickListener: (() -> Unit)? = null
+    protected open var provideFileUploadClickListener: ((ivHodler: ImageView) -> Unit)? = null
 
     /**
      * 驾驶证正面上传
      */
-    protected open var provideUpLoadRightSidePicClickListener: ((data: CardIdItemEntity) -> Unit)? =
+    protected open var provideUpLoadRightSidePicClickListener: ((data: CardIdItemEntity, ivHodler: ImageView) -> Unit)? =
         null
 
     /**
      * 驾驶证反面上传
      */
-    protected open var provideUpLoadReverseSidePicClickListener: ((data: CardIdItemEntity) -> Unit)? =
+    protected open var provideUpLoadReverseSidePicClickListener: ((data: CardIdItemEntity, ivHodler: ImageView) -> Unit)? =
         null
 
     /**
@@ -239,9 +240,10 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
                     uploadMap[serverKeyInner.endTimePostServerKey] = serverKeyInner.endTime
                 } else if (serverKeyInner is CardIdItemEntity) {
                     //上传驾驶证特殊判断
-                    uploadMap[serverKeyInner.postRightServerKey] = serverKeyInner.rightCradImageUrl
+                    uploadMap[serverKeyInner.postRightServerKey] =
+                        serverKeyInner.postRightServerValue
                     uploadMap[serverKeyInner.postReverseServerKey] =
-                        serverKeyInner.reverseCradImageUrl
+                        serverKeyInner.postReverseServerValue
                 } else {
                     uploadMap[serverKeyInner?.getServerKey()] = serverKeyInner?.getServerValue()
                 }

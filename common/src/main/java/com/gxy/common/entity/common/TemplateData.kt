@@ -165,8 +165,10 @@ data class CardIdItemEntity(
     val isRequireds: Boolean? = false,
     val postRightServerKey: String? = null,
     val postReverseServerKey: String? = null,
-    val rightCradImageUrl: String? = null,
-    val reverseCradImageUrl: String? = null
+    var postRightServerValue: String? = null,
+    var postReverseServerValue: String? = null,
+    var rightCradImageUrl: String? = null,
+    var reverseCradImageUrl: String? = null
 ) : ServerKeyInner {
     //特殊处理ServerKey
     override fun getServerKey() = ""

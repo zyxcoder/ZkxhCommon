@@ -1,5 +1,6 @@
 package com.gxy.common.common.adapter
 
+import android.widget.ImageView
 import com.gxy.common.R
 import com.gxy.common.databinding.ItemTableBinding
 import com.gxy.common.entity.common.CardIdItemEntity
@@ -15,15 +16,13 @@ import com.zyxcoder.mvvmroot.utils.dpToPx
 class GroupTableAdapter : BaseViewBindingAdapter<GroupTableEntity, ItemTableBinding>(
     ItemTableBinding::inflate, R.layout.item_table
 ) {
-    var onUploadFileClickListener: (() -> Unit)? = null
-    var onUpLoadRightSidePic: ((data: CardIdItemEntity) -> Unit)? = null
-    var onUpLoadReverseSidePic: ((data: CardIdItemEntity) -> Unit)? = null
+    var onUploadFileClickListener: ((ivHodler: ImageView) -> Unit)? = null
+    var onUpLoadRightSidePic: ((data: CardIdItemEntity, ivHodler: ImageView) -> Unit)? = null
+    var onUpLoadReverseSidePic: ((data: CardIdItemEntity, ivHodler: ImageView) -> Unit)? = null
     override fun convert(holder: BaseViewBindingHolder<ItemTableBinding>, item: GroupTableEntity) {
         holder.viewBind.apply {
             TableAdapter(
-                onUploadFileClickListener,
-                onUpLoadRightSidePic,
-                onUpLoadReverseSidePic
+                onUploadFileClickListener, onUpLoadRightSidePic, onUpLoadReverseSidePic
             ).apply {
                 rvTable.adapter = this
                 setNewInstance(item.tables.toMutableList())

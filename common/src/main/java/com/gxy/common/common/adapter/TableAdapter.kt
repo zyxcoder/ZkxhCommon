@@ -1,5 +1,6 @@
 package com.gxy.common.common.adapter
 
+import android.widget.ImageView
 import com.chad.library.adapter.base.BaseBinderAdapter
 import com.gxy.common.common.providers.CardIdBinder
 import com.gxy.common.entity.common.CheckItemEntity
@@ -27,9 +28,9 @@ import com.gxy.common.entity.common.IconTitleItemEntity
  * @date 2024/4/10
  */
 class TableAdapter(
-    onUploadFileClickListener: (() -> Unit)? = null,
-    onUpLoadRightSidePic: ((data: CardIdItemEntity) -> Unit)? = null,
-    onUpLoadReverseSidePic: ((data: CardIdItemEntity) -> Unit)? = null
+    onUploadFileClickListener: ((ivHodler: ImageView) -> Unit)? = null,
+    onUpLoadRightSidePic: ((data: CardIdItemEntity, ivHodler: ImageView) -> Unit)? = null,
+    onUpLoadReverseSidePic: ((data: CardIdItemEntity, ivHodler: ImageView) -> Unit)? = null
 ) : BaseBinderAdapter() {
     init {
         addItemBinder(InputItemEntity::class.java, InputBinder())

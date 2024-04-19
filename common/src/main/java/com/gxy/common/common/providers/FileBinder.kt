@@ -2,6 +2,7 @@ package com.gxy.common.common.providers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.chad.library.adapter.base.binder.QuickViewBindingItemBinder
 import com.gxy.common.R
 import com.gxy.common.databinding.ViewTypeFileBinding
@@ -15,7 +16,7 @@ import com.zyxcoder.mvvmroot.utils.loadImage
  * @date 2024/4/11
  * 上传文件模版
  */
-class FileBinder(private val onUploadFileClickListener: (() -> Unit)? = null) :
+class FileBinder(private val onUploadFileClickListener: ((ivHodler: ImageView) -> Unit)? = null) :
     QuickViewBindingItemBinder<FileItemEntity, ViewTypeFileBinding>() {
     override fun convert(holder: BinderVBHolder<ViewTypeFileBinding>, data: FileItemEntity) {
         holder.viewBinding.apply {
@@ -31,7 +32,7 @@ class FileBinder(private val onUploadFileClickListener: (() -> Unit)? = null) :
                     })
             }
             ivContractFile.onContinuousClick {
-                onUploadFileClickListener?.invoke()
+                onUploadFileClickListener?.invoke(ivContractFile)
             }
         }
     }

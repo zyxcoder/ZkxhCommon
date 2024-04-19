@@ -40,7 +40,7 @@ abstract class BaseTableViewModel : BaseViewModel() {
     ) {
         request<Job>(block = {
             loadingChange.showDialog.value = "提交中..."
-            updateTableData(mapParams)
+            updateTableData(mapParams?.filter { it.key != null && it.value != null })
             updateSuccess.value = true
             loadingChange.dismissDialog.value = true
         }, error = {
@@ -52,7 +52,7 @@ abstract class BaseTableViewModel : BaseViewModel() {
     fun insertUserData(mapParams: Map<String?, @JvmSuppressWildcards Any?>?) {
         request<Job>(block = {
             loadingChange.showDialog.value = "提交中..."
-            insertTableData(mapParams)
+            insertTableData(mapParams?.filter { it.key != null && it.value != null })
             insertSuccess.value = true
             loadingChange.dismissDialog.value = true
         }, error = {

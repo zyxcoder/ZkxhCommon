@@ -1,6 +1,7 @@
 package com.gxy.zkxhcommon
 
 import android.os.Bundle
+import android.widget.ImageView
 import com.gxy.common.common.table.BaseTableActivity
 import com.gxy.common.databinding.ActivityBaseTableBinding
 import com.gxy.common.entity.common.CardIdItemEntity
@@ -21,8 +22,10 @@ class Main : BaseTableActivity<MainViewModel, ActivityBaseTableBinding>() {
         return "表单"
     }
 
-    override var provideIsAddOrModify = true
-    override var handleSubmitBySelf = true
+    override fun provideIsAddOrModify() = true
+
+    override fun handleSubmitBySelf() = true
+
 
     override fun initView(savedInstanceState: Bundle?) {
         super.initView(savedInstanceState)
@@ -78,11 +81,13 @@ class Main : BaseTableActivity<MainViewModel, ActivityBaseTableBinding>() {
         )
     }
 
-    override var provideUpLoadReverseSidePicClickListener: ((data: CardIdItemEntity) -> Unit)? = {
-        showToast("反面")
-    }
+    override var provideUpLoadReverseSidePicClickListener: ((data: CardIdItemEntity, ivHodler: ImageView) -> Unit)? =
+        { data, ivHodler ->
+            showToast("反面")
+        }
 
-    override var provideUpLoadRightSidePicClickListener: ((data: CardIdItemEntity) -> Unit)? = {
-        showToast("正面")
-    }
+    override var provideUpLoadRightSidePicClickListener: ((data: CardIdItemEntity, ivHodler: ImageView) -> Unit)? =
+        { data, ivHodler ->
+            showToast("正面")
+        }
 }
