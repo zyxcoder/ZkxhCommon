@@ -168,7 +168,14 @@ data class CardIdItemEntity(
     var postRightServerValue: String? = null,
     var postReverseServerValue: String? = null,
     var rightCradImageUrl: String? = null,
-    var reverseCradImageUrl: String? = null
+    var reverseCradImageUrl: String? = null,
+    var carDesc: String? = null,
+    var cardRightSideDesc: String? = null,
+    var cardReverseSideDesc: String? = null,
+    var postCardRightSideDesc: String? = null,
+    var postCardReverseSideDesc: String? = null,
+    val marginTop: Int? = 0,
+    val marginBottom: Int? = 0
 ) : ServerKeyInner {
     //特殊处理ServerKey
     override fun getServerKey() = ""
