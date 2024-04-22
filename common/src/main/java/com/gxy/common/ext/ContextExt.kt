@@ -46,7 +46,9 @@ fun Context.showAllTimePicker(
         .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
         .isDialog(false)//是否显示为对话框样式
         .setDecorView(viewGroup)
-        .build().show()
+        .build().apply {
+            setKeyBackCancelable(false)
+        }.show()
 }
 
 
@@ -84,5 +86,7 @@ fun Context.showDefaultTimePicker(
         .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
         .isDialog(false)//是否显示为对话框样式
         .setDecorView(viewGroup)
-        .build().show()
+        .build().apply {
+            setKeyBackCancelable(false)
+        }.show()
 }
