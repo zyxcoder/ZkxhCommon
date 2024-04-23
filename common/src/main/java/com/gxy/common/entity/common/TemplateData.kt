@@ -174,6 +174,8 @@ data class CardIdItemEntity(
     var cardReverseSideDesc: String? = null,
     var postCardRightSideDesc: String? = null,
     var postCardReverseSideDesc: String? = null,
+    @DrawableRes var rightSidePlaceholder: Int? = R.drawable.ic_card_right_side,
+    @DrawableRes var reverseSidePlaceholder: Int? = R.drawable.ic_card_reverse_side,
     val marginTop: Int? = 0,
     val marginBottom: Int? = 0
 ) : ServerKeyInner {

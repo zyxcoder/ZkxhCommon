@@ -32,16 +32,23 @@ class CardIdBinder(
                 data.cardReverseSideDesc ?: context.getString(R.string.card_reverse_side)
             tvPostCardReverseSideDesc.text =
                 data.postCardReverseSideDesc ?: context.getString(R.string.post_card_reverse_side)
+
             ivRightSide.loadImage(data.rightCradImageUrl, ImageOptions().apply {
-                placeholder = R.drawable.ic_card_right_side
-                error = R.drawable.ic_card_right_side
-                fallback = R.drawable.ic_card_right_side
+                (data.rightSidePlaceholder ?: R.drawable.ic_card_right_side).let {
+                    placeholder = it
+                    error = it
+                    fallback = it
+                }
             })
+
             ivReverseSide.loadImage(data.reverseCradImageUrl, ImageOptions().apply {
-                placeholder = R.drawable.ic_card_reverse_side
-                error = R.drawable.ic_card_reverse_side
-                fallback = R.drawable.ic_card_reverse_side
+                (data.reverseSidePlaceholder ?: R.drawable.ic_card_reverse_side).let {
+                    placeholder = it
+                    error = it
+                    fallback = it
+                }
             })
+
             ivRightSideBoder.onContinuousClick {
                 onUpLoadRightSidePic?.invoke(data, ivRightSide)
             }
