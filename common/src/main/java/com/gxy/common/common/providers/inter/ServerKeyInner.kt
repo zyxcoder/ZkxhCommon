@@ -1,5 +1,7 @@
 package com.gxy.common.common.providers.inter
 
+import java.util.UUID
+
 /**
  * @author zhangyuxiang
  * @date 2024/4/12
@@ -8,4 +10,5 @@ package com.gxy.common.common.providers.inter
 interface ServerKeyInner {
     fun getServerKey(): String?
     fun getServerValue(): Any?
+    fun getUUid(): String = UUID.randomUUID().toString() // 自动生成唯一标识符
 }

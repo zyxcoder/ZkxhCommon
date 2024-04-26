@@ -53,3 +53,45 @@ private fun <VB : ViewBinding> withBottomSheetDialogFragmentGenericBindingClass(
     }
     throw IllegalArgumentException("There is no generic of ViewBinding.")
 }
+
+
+fun <VB : ViewBinding> BottomSheetDialogFragment.inflateBindingWithBottomVBDialogFragmentGeneric(
+    layoutInflater: LayoutInflater,
+    parent: ViewGroup?,
+    attachToParent: Boolean
+): VB =
+    withBottomVBDialogFragmentGenericBindingClass<VB>(this) { clazz ->
+        clazz.getMethod(
+            "inflate",
+            LayoutInflater::class.java,
+            ViewGroup::class.java,
+            Boolean::class.java
+        )
+            .invoke(null, layoutInflater, parent, attachToParent) as VB
+    }.also { binding ->
+        if (binding is ViewDataBinding) {
+            binding.lifecycleOwner = viewLifecycleOwner
+        }
+    }
+
+private fun <VB : ViewBinding> withBottomVBDialogFragmentGenericBindingClass(
+    any: Any,
+    block: (Class<VB>) -> VB
+): VB {
+    var genericSuperclass = any.javaClass.genericSuperclass
+    var superclass = any.javaClass.superclass
+    while (superclass != null) {
+        if (genericSuperclass is ParameterizedType) {
+            try {
+                return block.invoke(genericSuperclass.actualTypeArguments[1] as Class<VB>)
+            } catch (e: NoSuchMethodException) {
+            } catch (e: ClassCastException) {
+            } catch (e: InvocationTargetException) {
+                throw e.targetException
+            }
+        }
+        genericSuperclass = superclass.genericSuperclass
+        superclass = superclass.superclass
+    }
+    throw IllegalArgumentException("There is no generic of ViewBinding.")
+}

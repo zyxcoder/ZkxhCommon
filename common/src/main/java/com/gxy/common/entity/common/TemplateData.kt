@@ -52,6 +52,33 @@ data class InputItemEntity(
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = result
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as InputItemEntity
+
+        if (lableName != other.lableName) return false
+        if (isRequireds != other.isRequireds) return false
+        if (isCanEdit != other.isCanEdit) return false
+        if (isCanInput != other.isCanInput) return false
+        if (unitContent != other.unitContent) return false
+        if (isShowSearchBox != other.isShowSearchBox) return false
+        if (inputLayoutType != other.inputLayoutType) return false
+        if (textInputText != other.textInputText) return false
+        if (postServerKey != other.postServerKey) return false
+        if (selectId != other.selectId) return false
+        if (selectContent != other.selectContent) return false
+        if (showBottomLine != other.showBottomLine) return false
+        if (dialogListInfo != other.dialogListInfo) return false
+        if (result != other.result) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
 
 @Keep
@@ -63,6 +90,23 @@ data class CheckItemEntity(
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = isCheck
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as CheckItemEntity
+
+        if (lableName != other.lableName) return false
+        if (isRequireds != other.isRequireds) return false
+        if (isCheck != other.isCheck) return false
+        if (postServerKey != other.postServerKey) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
 
 @Keep
@@ -76,6 +120,25 @@ data class FileItemEntity(
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = fileAddress
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as FileItemEntity
+
+        if (lableName != other.lableName) return false
+        if (hintContent != other.hintContent) return false
+        if (isRequireds != other.isRequireds) return false
+        if (postServerKey != other.postServerKey) return false
+        if (fileAddress != other.fileAddress) return false
+        if (fileIsPic != other.fileIsPic) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
 
 @Keep
@@ -87,6 +150,23 @@ data class TitleItemEntity(
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = lableValue
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as TitleItemEntity
+
+        if (lableName != other.lableName) return false
+        if (postServerKey != other.postServerKey) return false
+        if (lableValue != other.lableValue) return false
+        if (isShowBottomLine != other.isShowBottomLine) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
 
 @Keep
@@ -104,6 +184,29 @@ data class DialogSelectItemEntity(
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = selectId
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as DialogSelectItemEntity
+
+        if (lableName != other.lableName) return false
+        if (drawableRes != other.drawableRes) return false
+        if (postServerKey != other.postServerKey) return false
+        if (isRequireds != other.isRequireds) return false
+        if (selectId != other.selectId) return false
+        if (selectContent != other.selectContent) return false
+        if (showEnter != other.showEnter) return false
+        if (dialogListInfo != other.dialogListInfo) return false
+        if (marginTop != other.marginTop) return false
+        if (marginBottom != other.marginBottom) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
 
 @Keep
@@ -119,6 +222,24 @@ data class MoneyItemEntity(
     } else {
         currentMoney
     }
+
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as MoneyItemEntity
+
+        if (lableName != other.lableName) return false
+        if (postServerKey != other.postServerKey) return false
+        if (currentMoney != other.currentMoney) return false
+        if (isRequireds != other.isRequireds) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
 
 @Keep
@@ -130,6 +251,23 @@ data class TxtItemEntity(
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = lableValue
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as TxtItemEntity
+
+        if (lableName != other.lableName) return false
+        if (lableValue != other.lableValue) return false
+        if (postServerKey != other.postServerKey) return false
+        if (backgroundRes != other.backgroundRes) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
 
 @Keep
@@ -146,6 +284,28 @@ data class SelectTimeItemEntity(
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = arrayListOf(startTime, endTime)
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as SelectTimeItemEntity
+
+        if (lableName != other.lableName) return false
+        if (startTime != other.startTime) return false
+        if (endTime != other.endTime) return false
+        if (postServerKey != other.postServerKey) return false
+        if (isRequireds != other.isRequireds) return false
+        if (isShowBottomLine != other.isShowBottomLine) return false
+        if (startTimePostServerKey != other.startTimePostServerKey) return false
+        if (endTimePostServerKey != other.endTimePostServerKey) return false
+        if (selectColor != other.selectColor) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
 
 @Keep
@@ -158,6 +318,24 @@ data class IconTitleItemEntity(
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = lableValue
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as IconTitleItemEntity
+
+        if (lableName != other.lableName) return false
+        if (lableValue != other.lableValue) return false
+        if (iconRes != other.iconRes) return false
+        if (postServerKey != other.postServerKey) return false
+        if (isShowBottomLine != other.isShowBottomLine) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
 
 @Keep
@@ -183,5 +361,33 @@ data class CardIdItemEntity(
     override fun getServerKey() = ""
 
     override fun getServerValue() = arrayListOf(rightCradImageUrl, reverseCradImageUrl)
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as CardIdItemEntity
+
+        if (isRequireds != other.isRequireds) return false
+        if (postRightServerKey != other.postRightServerKey) return false
+        if (postReverseServerKey != other.postReverseServerKey) return false
+        if (postRightServerValue != other.postRightServerValue) return false
+        if (postReverseServerValue != other.postReverseServerValue) return false
+        if (rightCradImageUrl != other.rightCradImageUrl) return false
+        if (reverseCradImageUrl != other.reverseCradImageUrl) return false
+        if (carDesc != other.carDesc) return false
+        if (cardRightSideDesc != other.cardRightSideDesc) return false
+        if (cardReverseSideDesc != other.cardReverseSideDesc) return false
+        if (postCardRightSideDesc != other.postCardRightSideDesc) return false
+        if (postCardReverseSideDesc != other.postCardReverseSideDesc) return false
+        if (rightSidePlaceholder != other.rightSidePlaceholder) return false
+        if (reverseSidePlaceholder != other.reverseSidePlaceholder) return false
+        if (marginTop != other.marginTop) return false
+        if (marginBottom != other.marginBottom) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
 }
