@@ -212,11 +212,11 @@ abstract class BaseTableActivity<VM : BaseTableViewModel, VB : ActivityBaseTable
                         is CardIdItemEntity -> {
                             if (itemEntity.isRequireds == true) {
                                 if (itemEntity.rightCradImageUrl == null) {
-                                    showToast(R.string.please_post_card_right_side)
+                                    showToast(getString(itemEntity.pleasePostCardRightSide))
                                     return false
                                 }
                                 if (itemEntity.reverseCradImageUrl == null) {
-                                    showToast(R.string.please_post_card_reverse_side)
+                                    showToast(getString(itemEntity.pleasePostCardReverseSide))
                                     return false
                                 }
                             }

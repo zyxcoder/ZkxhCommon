@@ -1,8 +1,10 @@
 package com.gxy.common.entity.common
 
+import android.annotation.SuppressLint
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.Keep
+import androidx.annotation.StringRes
 import com.gxy.common.R
 import com.gxy.common.common.providers.inter.ServerKeyInner
 
@@ -48,7 +50,9 @@ data class InputItemEntity(
     var selectContent: String? = null,
     val showBottomLine: Boolean? = true,
     val dialogListInfo: ArrayList<BottomListEntity>? = null,
-    var result: Any? = null//结果，初始化时如果有初始值，请将值附上
+    var result: Any? = null,//结果，初始化时如果有初始值，请将值附上
+    val specialLableHint: String? = null,
+    val dialogFromId: Int = Int.MIN_VALUE
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = result
@@ -76,6 +80,8 @@ data class InputItemEntity(
         if (showBottomLine != other.showBottomLine) return false
         if (dialogListInfo != other.dialogListInfo) return false
         if (result != other.result) return false
+        if (specialLableHint != other.specialLableHint) return false
+        if (dialogFromId != other.dialogFromId) return false
         if (getUUid() != other.getUUid()) return false
         return true
     }
@@ -280,7 +286,7 @@ data class SelectTimeItemEntity(
     val isShowBottomLine: Boolean? = false,
     val startTimePostServerKey: String? = null,
     val endTimePostServerKey: String? = null,
-    @ColorInt val selectColor: Int = R.color.color_333333
+    @SuppressLint("ResourceAsColor") @ColorInt val selectColor: Int = R.color.color_333333
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey
     override fun getServerValue() = arrayListOf(startTime, endTime)
@@ -354,6 +360,8 @@ data class CardIdItemEntity(
     var postCardReverseSideDesc: String? = null,
     @DrawableRes var rightSidePlaceholder: Int? = R.drawable.ic_card_right_side,
     @DrawableRes var reverseSidePlaceholder: Int? = R.drawable.ic_card_reverse_side,
+    @StringRes var pleasePostCardRightSide: Int = R.string.please_post_card_right_side,
+    @StringRes var pleasePostCardReverseSide: Int = R.string.please_post_card_reverse_side,
     val marginTop: Int? = 0,
     val marginBottom: Int? = 0
 ) : ServerKeyInner {

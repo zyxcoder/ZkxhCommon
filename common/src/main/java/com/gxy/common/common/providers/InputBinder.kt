@@ -78,8 +78,11 @@ class InputBinder : QuickViewBindingItemBinder<InputItemEntity, ViewTypeInputBin
                             isShowBottomLine = data.showBottomLine ?: true
                         )
                         setBottomDialogData(
-                            dialogTitle = context.getString(R.string.please_select) + "${data.lableName}",
-                            dialogListInfo = data.dialogListInfo
+                            dialogTitle = context.getString(R.string.please_select) + "${if (data.specialLableHint.isNullOrEmpty()) data.lableName else data.specialLableHint}",
+                            dialogListInfo = data.dialogListInfo,
+                            dialogFromId = data.dialogFromId,
+                            dialogCheckId = data.selectId,
+                            dialogNameId = data.postServerKey
                         )
                     }
 

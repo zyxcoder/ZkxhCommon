@@ -2,7 +2,6 @@ package com.gxy.common.network.api
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.gxy.common.network.api.ApiService
 import com.zyxcoder.mvvmroot.network.ApiException
 
 /**
@@ -23,7 +22,7 @@ data class ApiResult<T>(
     val listCount: Int?
 ) {
     fun apiData(): T {
-        if (data != null && statusCode == ApiService.RESPONSE_CODE_SUCCESS) {
+        if (data != null && statusCode == CommonApiService.RESPONSE_CODE_SUCCESS) {
             return data
         } else {
             throw ApiException(statusCode?.toIntOrNull() ?: -1, statusDesc ?: "")
@@ -31,7 +30,7 @@ data class ApiResult<T>(
     }
 
     fun apiNoData(): T? {
-        if (statusCode == ApiService.RESPONSE_CODE_SUCCESS) {
+        if (statusCode == CommonApiService.RESPONSE_CODE_SUCCESS) {
             return data
         } else {
             throw ApiException(statusCode?.toIntOrNull() ?: -1, statusDesc ?: "")
@@ -45,7 +44,7 @@ data class ApiErrotResult(
     @SerializedName("desc") val statusDesc: String?
 ) {
     fun apiErrorData() {
-        if (statusCode != ApiService.RESPONSE_CODE_SUCCESS) {
+        if (statusCode != CommonApiService.RESPONSE_CODE_SUCCESS) {
             throw ApiException(statusCode?.toIntOrNull() ?: -1, statusDesc ?: "")
         }
     }

@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.FragmentManager
 import com.gxy.common.R
+import com.gxy.common.base.BottomChooseDialogFragment
 import com.gxy.common.databinding.ViewInputBinding
 import com.gxy.common.entity.common.BottomListEntity
 import com.gxy.common.view.bottomdialog.BottomListDialogFragment
@@ -32,6 +33,9 @@ class InputLayout(
     private var hintContent: String? = null
 
     private var contentTag: Int? = null
+
+    private var dialogFromId: Int = -1
+    private var dialogNameId: String? = null
 
     var onInputChangeListener: ((content: String?) -> Unit)? = null
 
@@ -251,30 +255,53 @@ class InputLayout(
     }
 
     fun setBottomDialogData(
-        dialogTitle: String?, dialogListInfo: ArrayList<BottomListEntity>?
+        dialogTitle: String?,
+        dialogListInfo: ArrayList<BottomListEntity>? = null,
+        dialogFromId: Int = -1,
+        dialogNameId: String = "",
+        dialogCheckId: Int? = null
     ) {
         this.dialogTitle = dialogTitle
         this.dialogListInfo = dialogListInfo
+        this.dialogFromId = dialogFromId
+        this.dialogNameId = dialogNameId
+        this.contentTag = dialogCheckId
     }
 
     private fun showBottomDialog(manager: FragmentManager?, isShowSearchBox: Boolean?) {
-        dialogListInfo?.find {
-            it.id == contentTag
-        }?.isCheck = true
-        manager?.also {
-            if (dialogListInfo.isNullOrEmpty()) {
-                return
+        if (dialogFromId > 0 && !dialogNameId.isNullOrEmpty()) {
+            manager?.also {
+                BottomChooseDialogFragment.newInstance(
+                    dialogTitle = this.dialogTitle ?: "",
+                    fromId = this.dialogFromId,
+                    nameId = this.dialogNameId ?: "",
+                    checkId = getContentTag() ?: Int.MIN_VALUE
+                ).apply {
+                    onChooseClickListener = { bottomListEntity ->
+                        setSelectText(bottomListEntity.name, bottomListEntity.id)
+                        onEntityChangeListener?.invoke(bottomListEntity.data)
+                    }
+                }.show(it)
             }
-            BottomListDialogFragment.newInstance(
-                dialogTitle = this.dialogTitle,
-                dialogListInfo = this.dialogListInfo,
-                isShowSearchBox = isShowSearchBox
-            ).apply {
-                onChooseClickListener = { bottomListEntity ->
-                    setSelectText(bottomListEntity.name, bottomListEntity.id)
-                    onEntityChangeListener?.invoke(bottomListEntity.data)
+        } else {
+            dialogListInfo?.find {
+                it.id == contentTag
+            }?.isCheck = true
+            manager?.also {
+                if (dialogListInfo.isNullOrEmpty()) {
+                    return
                 }
-            }.show(it)
+                BottomListDialogFragment.newInstance(
+                    dialogTitle = this.dialogTitle,
+                    dialogListInfo = this.dialogListInfo,
+                    isShowSearchBox = isShowSearchBox
+                ).apply {
+                    onChooseClickListener = { bottomListEntity ->
+                        setSelectText(bottomListEntity.name, bottomListEntity.id)
+                        onEntityChangeListener?.invoke(bottomListEntity.data)
+                    }
+                }.show(it)
+            }
         }
     }
 
