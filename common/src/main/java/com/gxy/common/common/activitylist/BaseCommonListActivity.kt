@@ -71,6 +71,10 @@ abstract class BaseCommonListActivity<VM : BaseCommonListActivityViewModel, VB :
      */
     protected open fun provideSearchHintContent(): String? = null
 
+    /**
+     * 设置搜索框是否可见
+     */
+    protected open fun provideSearchVisibility(): Boolean = true
 
     /**
      * 右边按钮的点击事件
@@ -121,6 +125,8 @@ abstract class BaseCommonListActivity<VM : BaseCommonListActivityViewModel, VB :
                 }
             }
             searchLayout.setSearchHintContent(provideSearchHintContent())
+            searchLayout.isVisible = provideSearchVisibility()
+
             if (fragments.size > 1) {
                 clContent.setBackgroundResource(R.drawable.ic_contract_list_bg)
             } else {

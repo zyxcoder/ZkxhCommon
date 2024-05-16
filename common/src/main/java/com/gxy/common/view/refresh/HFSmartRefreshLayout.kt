@@ -41,7 +41,7 @@ class HFSmartRefreshLayout(
                     backgroundColor
                 )
             })
-            setEnableLastTime(false)
+            setEnableLastTime(true)
             setAccentColor(backgroundColor)
         })
         setRefreshFooter(RefreshFooter(context, attrs).apply {

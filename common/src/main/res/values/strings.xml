@@ -304,4 +304,7 @@
     <string name="post_card_reverse_side">上传驾驶证的反面</string>
     <string name="please_post_card_right_side">请上传驾驶证正面</string>
     <string name="please_post_card_reverse_side">请上传驾驶证反面</string>
+    <string name="waybill_management">运单管理</string>
+    <string name="plan_management">计划管理</string>
+    <string name="stay_tuned">敬请期待</string>
 </resources>
