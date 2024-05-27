@@ -9,6 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
+import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.fragment.app.FragmentManager
 import com.gxy.common.R
 import com.gxy.common.base.BottomChooseDialogFragment
@@ -18,6 +20,7 @@ import com.gxy.common.view.bottomdialog.BottomListDialogFragment
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
 import com.zyxcoder.mvvmroot.ext.showToast
 
+
 /**
  * @author zhangyuxiang
  * @date 2024/3/4
@@ -25,7 +28,6 @@ import com.zyxcoder.mvvmroot.ext.showToast
 class InputLayout(
     context: Context, attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
-
     private var dialogTitle: String? = null
     private var dialogListInfo: ArrayList<BottomListEntity>? = null
     private var mBinding: ViewInputBinding
@@ -61,6 +63,9 @@ class InputLayout(
             etName.isVisible = isCanInput
             etName.inputType =
                 attr.getInt(R.styleable.InputLayout_android_inputType, InputType.TYPE_CLASS_TEXT)
+
+            setPhoneType()
+
             hintContent = attr.getString(R.styleable.InputLayout_input_hint)
             etName.hint = hintContent
             val selectContent = attr.getString(R.styleable.InputLayout_select_content)
@@ -98,7 +103,12 @@ class InputLayout(
                 attr.getBoolean(R.styleable.InputLayout_editTextCanEdit, true)
             mBinding.etName.setTextColor(
                 ContextCompat.getColor(
-                    context, if (attr.getBoolean(R.styleable.InputLayout_editTextCanEdit, true)) R.color.color_333333 else R.color.color_black_999999
+                    context,
+                    if (attr.getBoolean(
+                            R.styleable.InputLayout_editTextCanEdit,
+                            true
+                        )
+                    ) R.color.color_333333 else R.color.color_black_999999
                 )
             )
             etName.doAfterTextChanged {
@@ -106,6 +116,52 @@ class InputLayout(
             }
         }
         attr.recycle()
+    }
+
+    private fun setPhoneType() {
+        mBinding.etName.apply {
+            if (inputType == InputType.TYPE_CLASS_PHONE) {
+                doOnTextChanged { text, start, before, _ ->
+                    if (!text.isNullOrEmpty()) {
+                        val stringBuilder = StringBuilder()
+                        for (i in text.indices) {
+                            if (i != 3 && i != 8 && text[i] == ' ') {
+                                continue
+                            } else {
+                                stringBuilder.append(text[i])
+                                if ((stringBuilder.length == 4 || stringBuilder.length == 9)
+                                    && stringBuilder[stringBuilder.length - 1] != ' '
+                                ) {
+                                    stringBuilder.insert(stringBuilder.length - 1, ' ')
+                                }
+                            }
+                        }
+
+                        if (stringBuilder.toString() != text.toString()) {
+                            var index = start + 1
+                            if (stringBuilder[start] == ' ') {
+                                if (before == 0) {
+                                    index++
+                                } else {
+                                    index--
+                                }
+                            } else {
+                                if (before == 1) {
+                                    index--
+                                }
+                            }
+                            setText(stringBuilder.toString())
+                            setSelection(index)
+                        }
+
+                        if (stringBuilder.toString().length > 13) {
+                            setText(stringBuilder.toString().subSequence(0, 13))
+                            setSelection(13)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -151,6 +207,7 @@ class InputLayout(
                 }
                 etName.isVisible = isCanInput
                 etName.inputType = inputType ?: InputType.TYPE_CLASS_TEXT
+                setPhoneType()
                 etName.hint = hintContent
                 tvName.text = if (selectContent.isNullOrEmpty()) hintContent else selectContent
                 tvName.setTextColor(
@@ -226,7 +283,10 @@ class InputLayout(
                 } else {
                     tvName.text.toString()
                 }
-            } else if (etName.isVisible) etName.text.toString() else tvMessage.text.toString()
+            } else if (etName.isVisible) {
+                if (etName.inputType == InputType.TYPE_CLASS_PHONE) etName.text.toString().trim()
+                    .replace(" ", "") else etName.text.toString()
+            } else tvMessage.text.toString()
         }
     }
 
@@ -297,8 +357,13 @@ class InputLayout(
                     isShowSearchBox = isShowSearchBox
                 ).apply {
                     onChooseClickListener = { bottomListEntity ->
-                        setSelectText(bottomListEntity.name, bottomListEntity.id)
                         onEntityChangeListener?.invoke(bottomListEntity.data)
+                        onEntityIdChangeListener?.invoke(bottomListEntity.id)
+                        if (bottomListEntity.id == SELECT_OTHER_ITEM) {
+                            showBottomDialog(manager, isShowSearchBox)
+                        } else {
+                            setSelectText(bottomListEntity.name, bottomListEntity.id)
+                        }
                     }
                 }.show(it)
             }
@@ -306,4 +371,7 @@ class InputLayout(
     }
 
     var onEntityChangeListener: ((content: Any?) -> Unit)? = null
+    var onEntityIdChangeListener: ((content: Int?) -> Unit)? = null
 }
+
+const val SELECT_OTHER_ITEM = Int.MAX_VALUE

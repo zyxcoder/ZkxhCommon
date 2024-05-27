@@ -40,7 +40,11 @@ abstract class BaseTableViewModel : BaseViewModel() {
     ) {
         request<Job>(block = {
             loadingChange.showDialog.value = "提交中..."
-            updateTableData(mapParams?.filter { it.key != null && it.value != null })
+            val map = mutableMapOf<String?, Any?>()
+            mapParams?.forEach {
+                map[it.key] = it.value ?: ""
+            }
+            updateTableData(map)
             updateSuccess.value = true
             loadingChange.dismissDialog.value = true
         }, error = {
@@ -52,7 +56,11 @@ abstract class BaseTableViewModel : BaseViewModel() {
     fun insertUserData(mapParams: Map<String?, @JvmSuppressWildcards Any?>?) {
         request<Job>(block = {
             loadingChange.showDialog.value = "提交中..."
-            insertTableData(mapParams?.filter { it.key != null && it.value != null })
+            val map = mutableMapOf<String?, Any?>()
+            mapParams?.forEach {
+                map[it.key] = it.value ?: ""
+            }
+            insertTableData(map)
             insertSuccess.value = true
             loadingChange.dismissDialog.value = true
         }, error = {

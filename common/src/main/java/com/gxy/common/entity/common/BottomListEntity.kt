@@ -15,5 +15,6 @@ data class BottomListEntity(
     val id: Int?,
     val name: String?,
     var isCheck: Boolean = false,
+    var isCanClick: Boolean = true,
     var data: @RawValue Any? = null
 ) : Parcelable

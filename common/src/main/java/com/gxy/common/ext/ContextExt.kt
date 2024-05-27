@@ -90,3 +90,39 @@ fun Context.showDefaultTimePicker(
             setKeyBackCancelable(false)
         }.show()
 }
+
+//展示年月日时分的时间选择器
+fun Context.showTimePicker(
+    viewGroup: ViewGroup? = null,
+    onDateSelectListener: ((date: Date?) -> Unit)?
+) {
+    TimePickerBuilder(
+        this
+    ) { date, _ -> onDateSelectListener?.invoke(date) }.setType(
+        booleanArrayOf(
+            true, true, true, true, true, false
+        )
+    )// 默认全部显示
+        .setCancelText("取消")//取消按钮文字
+        .setSubmitText("确定")//确认按钮文字
+        .setTitleSize(20)//标题文字大小
+        .setTitleText("请选择时间")//标题文字
+        .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
+        .isCyclic(false)//是否循环滚动
+        .setTitleColor(Color.BLACK)//标题文字颜色
+        .setSubmitColor(Color.BLUE)//确定按钮文字颜色
+        .setCancelColor(Color.BLUE)//取消按钮文字颜色
+        .setDate(Calendar.getInstance())// 如果不设置的话，默认是系统时间*/
+        .setRangDate(Calendar.getInstance().apply {
+            set(1900, 1, 1)
+        }, Calendar.getInstance().apply {
+            set(2100, 12, 31)
+        })//起始终止年月日设定
+        .setLabel("年", "月", "日", "时", "分", "秒")//默认设置为年月日时分秒
+        .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+        .isDialog(false)//是否显示为对话框样式
+        .setDecorView(viewGroup)
+        .build().apply {
+            setKeyBackCancelable(false)
+        }.show()
+}

@@ -22,14 +22,27 @@ class BottomListAdapter : BaseViewBindingAdapter<BottomListEntity, ItemBottomSel
     ) {
         holder.viewBind.apply {
             tvContent.text = item.name
-            tvContent.setTextColor(
-                ContextCompat.getColor(
-                    context,
-                    if (item.isCheck) R.color.color_2C7AF7 else R.color.color_333333
+            if (item.id == null || item.id < 0 || !item.isCanClick) {
+                tvContent.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.color_black_999999
+                    )
                 )
-            )
+                clRoot.isEnabled = false
+            } else {
+                clRoot.isEnabled = true
+                clRoot.setOnClickListener {
+                    onClickListener?.invoke(item)
+                }
+                tvContent.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        if (item.isCheck) R.color.color_2C7AF7 else R.color.color_333333
+                    )
+                )
+            }
 //            ivChoose.isVisible = item.isCheck
-            clRoot.setOnClickListener { onClickListener?.invoke(item) }
         }
     }
 }

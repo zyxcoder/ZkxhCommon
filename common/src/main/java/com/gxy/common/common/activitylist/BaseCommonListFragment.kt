@@ -60,14 +60,14 @@ abstract class BaseCommonListFragment<VM : BaseCommonListFragmentViewModel<ItemD
     /**
      * 设置搜索key
      */
-    fun setSearchKey(inputSearchKey: String?) {
+    open fun setSearchKey(inputSearchKey: String?) {
         searchKey = inputSearchKey
     }
 
     /**
      * 开始搜索
      */
-    fun startSearch() {
+    open fun startSearch() {
         //如果之前已经加载过才需要重新刷新
         if (isLazyLoaded) {
             mViewModel.getList(

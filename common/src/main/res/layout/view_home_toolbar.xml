@@ -20,11 +20,11 @@
             android:id="@+id/tvCompany"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="乌海市广源洗煤有限责任公司"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="乌海市广源洗煤有限责任公司" />
 
         <ImageView
             android:id="@+id/ivDown"
@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:src="@drawable/ic_down"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tvCompany"
             app:layout_constraintLeft_toRightOf="@+id/tvCompany"
             app:layout_constraintTop_toTopOf="@+id/tvCompany" />

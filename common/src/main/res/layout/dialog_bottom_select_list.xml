@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dialog_topround_back"
-    android:minHeight="260dp">
+    android:minHeight="260dp"
+    android:paddingBottom="@dimen/dp_10">
 
     <TextView
         android:id="@+id/tvTitle"

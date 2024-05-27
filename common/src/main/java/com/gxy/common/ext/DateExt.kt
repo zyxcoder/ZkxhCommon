@@ -11,6 +11,7 @@ import java.util.Locale
 
 enum class DateFormatType {
     TYPE_YMD,//年月日格式
+    TYPE_YMDHM,//年月日时分格式
     TYPE_YMDHMS//年月日时分秒格式
 }
 
@@ -26,6 +27,10 @@ fun Date?.dateToString(formatType: DateFormatType): String? {
 
             DateFormatType.TYPE_YMDHMS -> {
                 SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(this)
+            }
+
+            DateFormatType.TYPE_YMDHM -> {
+                SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH).format(this)
             }
         } ?: null
     }

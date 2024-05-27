@@ -38,7 +38,9 @@ data class BottomCommonOption(
     @SerializedName("assayindexId") val assayindexId: List<HashMap<String?, String?>>?,
     @SerializedName("carrierId") val carrierId: List<HashMap<String?, String?>>?,
     @SerializedName("truckId") val truckId: List<HashMap<String?, String?>>?,
-    @SerializedName("bindingType") val bindingType: List<HashMap<String?, String?>>?
+    @SerializedName("bindingType") val bindingType: List<HashMap<String?, String?>>?,
+    @SerializedName("billDriver") val billDriver: List<HashMap<String?, String?>>?,
+    @SerializedName("billTruck") val billTruck: List<HashMap<String?, String?>>?
 ) {
     fun getValueByKey(key: String?): List<HashMap<String?, String?>>? {
         return when (key) {
@@ -72,6 +74,8 @@ data class BottomCommonOption(
             "carrierId" -> carrierId
             "truckId" -> truckId
             "bindingType" -> bindingType
+            "billTruck" -> billTruck
+            "billDriver" -> billDriver
             else -> null
         }
     }

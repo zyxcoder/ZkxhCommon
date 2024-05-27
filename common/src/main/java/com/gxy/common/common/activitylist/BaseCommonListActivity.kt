@@ -218,7 +218,9 @@ abstract class BaseCommonListActivity<VM : BaseCommonListActivityViewModel, VB :
      */
     fun updateCurrentTabView(position: Int, listCount: Int? = 0) {
         updateTabView(
-            mViewBind.tabLayout.getTabAt(position), true, listCount
+            mViewBind.tabLayout.getTabAt(position),
+            position == mViewBind.viewPager.currentItem,
+            listCount
         )
     }
 
