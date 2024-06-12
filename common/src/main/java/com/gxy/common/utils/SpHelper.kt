@@ -7,7 +7,9 @@ import com.zyxcoder.mvvmroot.base.appContext
  * Create by zyx_coder on 2023/7/27
  */
 private const val ZKXH_SP = "zkxh_sp"
-
+private const val SLEC_SP = "slec_sp"
+//测试模式配置的api环境地址
+const val TEST_MODEL_API_URL = "test_model_api_url"
 
 //用户token
 const val USER_TOKEN = "user_token"
@@ -50,5 +52,19 @@ fun removeSpValue(key: String) {
 fun clearSpValue() {
     val editor = appContext.getSharedPreferences(ZKXH_SP, Context.MODE_PRIVATE).edit()
     editor.clear()
+    editor.apply()
+}
+
+/**
+ * 清空登录相关sp信息
+ */
+fun clearLoginSpValue() {
+    val sp = appContext.getSharedPreferences(SLEC_SP, Context.MODE_PRIVATE)
+    val editor = sp.edit()
+    sp.all.filterNot {
+        it.key == TEST_MODEL_API_URL
+    }.forEach {
+        editor.remove(it.key)
+    }
     editor.apply()
 }

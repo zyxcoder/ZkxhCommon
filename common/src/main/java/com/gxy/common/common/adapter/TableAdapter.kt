@@ -16,12 +16,14 @@ import com.gxy.common.common.providers.DialogSelectBinder
 import com.gxy.common.common.providers.FileBinder
 import com.gxy.common.common.providers.IconTittleBinder
 import com.gxy.common.common.providers.InputBinder
+import com.gxy.common.common.providers.InputPhoneBinder
 import com.gxy.common.common.providers.MoneyBinder
 import com.gxy.common.common.providers.SelectTimeBinder
 import com.gxy.common.common.providers.TitleBinder
 import com.gxy.common.common.providers.TxtBinder
 import com.gxy.common.entity.common.CardIdItemEntity
 import com.gxy.common.entity.common.IconTitleItemEntity
+import com.gxy.common.entity.common.InputPhoneItemEntity
 
 /**
  * @author zhangyuxiang
@@ -34,6 +36,7 @@ class TableAdapter(
 ) : BaseBinderAdapter() {
     init {
         addItemBinder(InputItemEntity::class.java, InputBinder())
+        addItemBinder(InputPhoneItemEntity::class.java, InputPhoneBinder())
         addItemBinder(CheckItemEntity::class.java, CheckBinder())
         addItemBinder(FileItemEntity::class.java, FileBinder(onUploadFileClickListener))
         addItemBinder(TitleItemEntity::class.java, TitleBinder())

@@ -30,3 +30,15 @@ fun String.toFormattedDate(inputFormat: String, outputFormat: String): String {
         return this // 返回原始日期字符串
     }
 }
+
+fun String?.safeToDouble(): Double {
+    return this?.toDoubleOrNull() ?: 0.0
+}
+
+/**
+ * 判断手机号是否合法,这里还是不要完全按照正规正则写死，因为手机号更新速度较快，写死了到时候改动也比较频繁
+ */
+fun String?.isLegalPhoneNumber(): Boolean {
+    val telecomOperatorPattern = "^(1[3-9])\\d{9}$".toRegex()
+    return telecomOperatorPattern.matches(this ?: "")
+}

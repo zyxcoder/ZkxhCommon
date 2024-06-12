@@ -21,6 +21,7 @@ class ToolbarLayout constructor(
 
     var onBackListener: (() -> Unit)? = null
     var onRightClickListener: (() -> Unit)? = null
+    var onTitleClickListener: (() -> Unit)? = null
     private var mBinding: ViewToolbarBinding
 
     init {
@@ -28,6 +29,9 @@ class ToolbarLayout constructor(
         orientation = VERTICAL
         mBinding = ViewToolbarBinding.inflate(LayoutInflater.from(context), this, true)
         mBinding.apply {
+            tvTitle.setOnClickListener {
+                onTitleClickListener?.invoke()
+            }
             ivBack.setOnClickListener {
                 if (attr.getBoolean(R.styleable.ToolbarLayout_need_self_handle_back, false)) {
                     onBackListener?.invoke()

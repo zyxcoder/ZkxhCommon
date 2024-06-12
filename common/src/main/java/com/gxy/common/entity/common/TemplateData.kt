@@ -88,6 +88,40 @@ data class InputItemEntity(
 }
 
 @Keep
+data class InputPhoneItemEntity(
+    val isRequireds: Boolean? = false,
+    val isCanEdit: Boolean? = true,
+    val hintContent: String? = null,
+    val title: String? = null,
+    val phone: String? = null,
+    var result: Any? = null,//结果，初始化时如果有初始值，请将值附上
+    val postServerKey: String,
+) : ServerKeyInner {
+    override fun getServerKey() = postServerKey
+    override fun getServerValue() = result
+    override fun hashCode(): Int {
+        return getUUid().hashCode()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as InputPhoneItemEntity
+
+        if (isRequireds != other.isRequireds) return false
+        if (isCanEdit != other.isCanEdit) return false
+        if (hintContent != other.hintContent) return false
+        if (title != other.title) return false
+        if (phone != other.phone) return false
+        if (result != other.result) return false
+        if (postServerKey != other.postServerKey) return false
+        if (getUUid() != other.getUUid()) return false
+        return true
+    }
+}
+
+@Keep
 data class CheckItemEntity(
     val lableName: String?,
     val isRequireds: Boolean? = false,

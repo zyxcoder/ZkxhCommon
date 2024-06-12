@@ -1,5 +1,7 @@
 package com.gxy.common.ext
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
 import android.view.ViewGroup
@@ -125,4 +127,14 @@ fun Context.showTimePicker(
         .build().apply {
             setKeyBackCancelable(false)
         }.show()
+}
+
+/**
+ * 复制文字到剪切板
+ * @param text 复制的文字
+ */
+fun Context.copyText(text: String) {
+    (getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager)?.setPrimaryClip(
+        ClipData.newPlainText("text", text)
+    )
 }

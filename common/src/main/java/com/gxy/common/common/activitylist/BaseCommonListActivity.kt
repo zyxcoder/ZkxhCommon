@@ -6,16 +6,20 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.viewbinding.ViewBinding
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.MODE_FIXED
+import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
 import com.google.android.material.tabs.TabLayout.Mode
 import com.gxy.common.R
 import com.gxy.common.databinding.ActivityBaseCommonListBinding
 import com.gxy.common.databinding.ItemTabCenterTextBinding
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.common.adapter.SimpleFragmentPagerAdapter
+import com.gxy.common.utils.getScreenWidth
+import com.zyxcoder.mvvmroot.utils.dpToPx
 
 /**
  * @author zhangyuxiang
@@ -96,6 +100,10 @@ abstract class BaseCommonListActivity<VM : BaseCommonListActivityViewModel, VB :
      */
     protected open var provideSelectTypeIsVisibility: Boolean = false
 
+    /**
+     * 标题栏左右边距
+     */
+    protected open var provideTabPadding: Int = dpToPx(20f).toInt()
 
     /**
      * 设置Tab行为模式
@@ -175,7 +183,19 @@ abstract class BaseCommonListActivity<VM : BaseCommonListActivityViewModel, VB :
                         ItemTabCenterTextBinding.inflate(layoutInflater).apply {
                             tvTabText.text = fragments[it].getTitle()
                             tvTabTextBig.text = fragments[it].getTitle()
-                        }.root
+                        }.root.apply {
+                            post {
+                                if (provideTabMode == MODE_FIXED && fragments.size > 1) {
+                                    updateLayoutParams {
+                                        width = getScreenWidth() / fragments.size
+                                    }
+                                }
+
+                                if (provideTabMode == MODE_SCROLLABLE && fragments.size > 1) {
+                                    setPadding(provideTabPadding, 0, provideTabPadding, 0)
+                                }
+                            }
+                        }
                 }
                 updateTabView(getTabAt(0), true)
             }
@@ -236,5 +256,4 @@ abstract class BaseCommonListActivity<VM : BaseCommonListActivityViewModel, VB :
             )
         }
     }
-
 }

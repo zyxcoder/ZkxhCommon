@@ -64,8 +64,6 @@ class InputLayout(
             etName.inputType =
                 attr.getInt(R.styleable.InputLayout_android_inputType, InputType.TYPE_CLASS_TEXT)
 
-            setPhoneType()
-
             hintContent = attr.getString(R.styleable.InputLayout_input_hint)
             etName.hint = hintContent
             val selectContent = attr.getString(R.styleable.InputLayout_select_content)
@@ -118,52 +116,6 @@ class InputLayout(
         attr.recycle()
     }
 
-    private fun setPhoneType() {
-        mBinding.etName.apply {
-            if (inputType == InputType.TYPE_CLASS_PHONE) {
-                doOnTextChanged { text, start, before, _ ->
-                    if (!text.isNullOrEmpty()) {
-                        val stringBuilder = StringBuilder()
-                        for (i in text.indices) {
-                            if (i != 3 && i != 8 && text[i] == ' ') {
-                                continue
-                            } else {
-                                stringBuilder.append(text[i])
-                                if ((stringBuilder.length == 4 || stringBuilder.length == 9)
-                                    && stringBuilder[stringBuilder.length - 1] != ' '
-                                ) {
-                                    stringBuilder.insert(stringBuilder.length - 1, ' ')
-                                }
-                            }
-                        }
-
-                        if (stringBuilder.toString() != text.toString()) {
-                            var index = start + 1
-                            if (stringBuilder[start] == ' ') {
-                                if (before == 0) {
-                                    index++
-                                } else {
-                                    index--
-                                }
-                            } else {
-                                if (before == 1) {
-                                    index--
-                                }
-                            }
-                            setText(stringBuilder.toString())
-                            setSelection(index)
-                        }
-
-                        if (stringBuilder.toString().length > 13) {
-                            setText(stringBuilder.toString().subSequence(0, 13))
-                            setSelection(13)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     /**
      * 初始化布局，主要用于Table初始化
      * @param inputType 输入类型
@@ -207,7 +159,6 @@ class InputLayout(
                 }
                 etName.isVisible = isCanInput
                 etName.inputType = inputType ?: InputType.TYPE_CLASS_TEXT
-                setPhoneType()
                 etName.hint = hintContent
                 tvName.text = if (selectContent.isNullOrEmpty()) hintContent else selectContent
                 tvName.setTextColor(
@@ -284,8 +235,7 @@ class InputLayout(
                     tvName.text.toString()
                 }
             } else if (etName.isVisible) {
-                if (etName.inputType == InputType.TYPE_CLASS_PHONE) etName.text.toString().trim()
-                    .replace(" ", "") else etName.text.toString()
+                etName.text.toString()
             } else tvMessage.text.toString()
         }
     }

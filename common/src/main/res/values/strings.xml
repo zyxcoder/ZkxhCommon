@@ -307,4 +307,6 @@
     <string name="waybill_management">运单管理</string>
     <string name="plan_management">计划管理</string>
     <string name="stay_tuned">敬请期待</string>
+    <string name="phone_num">手机号</string>
+    <string name="not_legal_phonenumber">手机号格式有误</string>
 </resources>

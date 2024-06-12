@@ -151,12 +151,12 @@ abstract class BaseCommonListFragment<VM : BaseCommonListFragmentViewModel<ItemD
             dataHasMore.observe(this@BaseCommonListFragment) {
                 mViewBind.refreshLayout.setNoMoreData(!it)
             }
-            listCount.observe(this@BaseCommonListFragment) {
-                (activity as? BaseCommonListActivity<*, *, *, *>)?.updateCurrentTabView(
-                    currentFragmentInViewPagerIndex,
-                    it
-                )
-            }
+//            listCount.observe(this@BaseCommonListFragment) {
+//                (activity as? BaseCommonListActivity<*, *, *, *>)?.updateCurrentTabView(
+//                    currentFragmentInViewPagerIndex,
+//                    it
+//                )
+//            }
         }
     }
 }
