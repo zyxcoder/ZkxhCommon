@@ -21,6 +21,7 @@ class InputPhoneBinder : QuickViewBindingItemBinder<InputPhoneItemEntity, ViewIn
             etPhone.doAfterTextChanged {
                 data.result = etPhone.phoneText
             }
+            etPhone.isEnabled = !(data.isCanEdit ?: false)
         }
     }
 

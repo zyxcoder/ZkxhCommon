@@ -212,7 +212,7 @@ abstract class BaseCommonListActivity<VM : BaseCommonListActivityViewModel, VB :
         }
     }
 
-    private fun startSearch() {
+    protected open fun startSearch() {
         fragments[mViewBind.viewPager.currentItem].startSearch()
     }
 

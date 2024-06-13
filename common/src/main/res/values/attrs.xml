@@ -57,6 +57,7 @@
         <attr name="right_title_isvisible" format="boolean" />
         <attr name="right_title_color" format="color" />
         <attr name="need_self_handle_back" format="boolean" />
+        <attr name="toolbar_themecolor" format="color" />
     </declare-styleable>
     <declare-styleable name="SearchLayout">
         <attr name="search_hint" format="string" />

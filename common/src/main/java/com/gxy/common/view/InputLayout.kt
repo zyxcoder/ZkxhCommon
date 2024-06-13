@@ -40,6 +40,7 @@ class InputLayout(
     private var dialogNameId: String? = null
 
     var onInputChangeListener: ((content: String?) -> Unit)? = null
+    var onFocusChangeListener: ((isFocus: Boolean?) -> Unit)? = null
 
     init {
         val attr = context.obtainStyledAttributes(attrs, R.styleable.InputLayout)
@@ -111,6 +112,9 @@ class InputLayout(
             )
             etName.doAfterTextChanged {
                 onInputChangeListener?.invoke(it.toString())
+            }
+            etName.setOnFocusChangeListener { _, hasFocus ->
+                onFocusChangeListener?.invoke(hasFocus)
             }
         }
         attr.recycle()

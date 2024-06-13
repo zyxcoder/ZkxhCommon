@@ -29,6 +29,14 @@ class ToolbarLayout constructor(
         orientation = VERTICAL
         mBinding = ViewToolbarBinding.inflate(LayoutInflater.from(context), this, true)
         mBinding.apply {
+
+            toolbar.setBackgroundColor(
+                attr.getColor(
+                    R.styleable.ToolbarLayout_toolbar_themecolor,
+                    ContextCompat.getColor(context, R.color.transparent)
+                )
+            )
+
             tvTitle.setOnClickListener {
                 onTitleClickListener?.invoke()
             }

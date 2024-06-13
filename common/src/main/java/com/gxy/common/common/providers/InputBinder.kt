@@ -38,9 +38,13 @@ class InputBinder : QuickViewBindingItemBinder<InputItemEntity, ViewTypeInputBin
                                 getContent()
                             }
                         }
+//                        data.onAfterChangeListener?.invoke(getContent())
                         selectId = getContentTag()
                         selectContent = getContent()
                     }
+                }
+                onFocusChangeListener = {
+                    data.onFocusChangeListener?.invoke(it, getContent())
                 }
                 when (data.inputLayoutType) {
                     InputLayoutType.DEFAULT, InputLayoutType.DEFAULT_UNIT -> {

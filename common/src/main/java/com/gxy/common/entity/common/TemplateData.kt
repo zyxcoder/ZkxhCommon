@@ -52,6 +52,8 @@ data class InputItemEntity(
     val dialogListInfo: ArrayList<BottomListEntity>? = null,
     var result: Any? = null,//结果，初始化时如果有初始值，请将值附上
     val specialLableHint: String? = null,
+//    var onAfterChangeListener: ((text: String?) -> Unit)? = null,
+    var onFocusChangeListener: ((isFocus: Boolean?, truckCode: String?) -> Unit)? = null,
     val dialogFromId: Int = Int.MIN_VALUE
 ) : ServerKeyInner {
     override fun getServerKey() = postServerKey

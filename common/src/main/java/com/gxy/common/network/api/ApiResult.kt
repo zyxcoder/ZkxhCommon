@@ -36,6 +36,17 @@ data class ApiResult<T>(
             throw ApiException(statusCode?.toIntOrNull() ?: -1, statusDesc ?: "")
         }
     }
+
+    //用于ocr识别
+    fun apiOcrData(): T {
+        if (data != null && statusCode == CommonApiService.RESPONSE_CODE_SUCCESS) {
+            return data
+        } else if (data != null && statusCode == "-700") {
+            return data
+        } else {
+            throw ApiException(statusCode?.toIntOrNull() ?: -1, statusDesc ?: "")
+        }
+    }
 }
 
 @Keep
