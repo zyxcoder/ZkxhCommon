@@ -9,8 +9,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
-import androidx.databinding.adapters.TextViewBindingAdapter
 import androidx.fragment.app.FragmentManager
 import com.gxy.common.R
 import com.gxy.common.base.BottomChooseDialogFragment
@@ -41,6 +39,7 @@ class InputLayout(
 
     var onInputChangeListener: ((content: String?) -> Unit)? = null
     var onFocusChangeListener: ((isFocus: Boolean?) -> Unit)? = null
+    var onClickListener: (() -> Unit)? = null
 
     init {
         val attr = context.obtainStyledAttributes(attrs, R.styleable.InputLayout)
@@ -89,11 +88,14 @@ class InputLayout(
             val isNeedShowBottomDialog =
                 attr.getBoolean(R.styleable.InputLayout_is_need_show_bottom_dialog, true)
             val isShowSearchBox = attr.getBoolean(R.styleable.InputLayout_show_search_box, false)
-            if (!isCanInput && isNeedShowBottomDialog) {
-                clRoot.onContinuousClick {
+
+            clRoot.onContinuousClick {
+                if (!isCanInput && isNeedShowBottomDialog) {
                     showBottomDialog(
                         (context as? AppCompatActivity)?.supportFragmentManager, isShowSearchBox
                     )
+                } else {
+                    onClickListener?.invoke()
                 }
             }
             //设置EditText能否编辑
@@ -179,11 +181,13 @@ class InputLayout(
                 tvUnit.isVisible = haseUnit
                 tvUnit.text = unitContent
                 //默认需要展示底部弹窗
-                if (!isCanInput && isNeedShowBottomDialog) {
-                    clRoot.onContinuousClick {
+                clRoot.onContinuousClick {
+                    if (!isCanInput && isNeedShowBottomDialog) {
                         showBottomDialog(
                             (context as? AppCompatActivity)?.supportFragmentManager, isShowSearchBox
                         )
+                    } else {
+                        onClickListener?.invoke()
                     }
                 }
                 //设置EditText能否编辑
