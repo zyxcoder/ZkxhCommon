@@ -39,7 +39,6 @@ class InputLayout(
 
     var onInputChangeListener: ((content: String?) -> Unit)? = null
     var onFocusChangeListener: ((isFocus: Boolean?) -> Unit)? = null
-    var onClickListener: (() -> Unit)? = null
 
     init {
         val attr = context.obtainStyledAttributes(attrs, R.styleable.InputLayout)
@@ -89,15 +88,14 @@ class InputLayout(
                 attr.getBoolean(R.styleable.InputLayout_is_need_show_bottom_dialog, true)
             val isShowSearchBox = attr.getBoolean(R.styleable.InputLayout_show_search_box, false)
 
-            clRoot.onContinuousClick {
-                if (!isCanInput && isNeedShowBottomDialog) {
+            if (!isCanInput && isNeedShowBottomDialog) {
+                clRoot.onContinuousClick {
                     showBottomDialog(
                         (context as? AppCompatActivity)?.supportFragmentManager, isShowSearchBox
                     )
-                } else {
-                    onClickListener?.invoke()
                 }
             }
+
             //设置EditText能否编辑
             etName.isFocusable = attr.getBoolean(R.styleable.InputLayout_editTextCanEdit, true)
             etName.isFocusableInTouchMode =
@@ -181,13 +179,12 @@ class InputLayout(
                 tvUnit.isVisible = haseUnit
                 tvUnit.text = unitContent
                 //默认需要展示底部弹窗
-                clRoot.onContinuousClick {
-                    if (!isCanInput && isNeedShowBottomDialog) {
+
+                if (!isCanInput && isNeedShowBottomDialog) {
+                    clRoot.onContinuousClick {
                         showBottomDialog(
                             (context as? AppCompatActivity)?.supportFragmentManager, isShowSearchBox
                         )
-                    } else {
-                        onClickListener?.invoke()
                     }
                 }
                 //设置EditText能否编辑
