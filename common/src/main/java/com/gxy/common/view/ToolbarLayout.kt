@@ -40,8 +40,10 @@ class ToolbarLayout constructor(
             tvTitle.setOnClickListener {
                 onTitleClickListener?.invoke()
             }
+            val needSelfHandleBack =
+                attr.getBoolean(R.styleable.ToolbarLayout_need_self_handle_back, false)
             ivBack.setOnClickListener {
-                if (attr.getBoolean(R.styleable.ToolbarLayout_need_self_handle_back, false)) {
+                if (needSelfHandleBack) {
                     onBackListener?.invoke()
                 } else {
                     //直接返回之前的页面
