@@ -6,10 +6,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.gxy.common.R
 import com.gxy.common.databinding.ViewToolbarBinding
+import com.zyxcoder.mvvmroot.ext.onContinuousClick
 
 /**
  * @author zhangyuxiang
@@ -21,6 +23,7 @@ class ToolbarLayout constructor(
 
     var onBackListener: (() -> Unit)? = null
     var onRightClickListener: (() -> Unit)? = null
+    var onRightIconClickListener: (() -> Unit)? = null
     var onTitleClickListener: (() -> Unit)? = null
     private var mBinding: ViewToolbarBinding
 
@@ -67,6 +70,21 @@ class ToolbarLayout constructor(
                     R.styleable.ToolbarLayout_right_title_isvisible, false
                 )
             )
+            setRightIconVisibility(
+                attr.getBoolean(
+                    R.styleable.ToolbarLayout_right_icon_isvisible,
+                    false
+                )
+            )
+            setRightIconRes(
+                attr.getResourceId(
+                    R.styleable.ToolbarLayout_right_icon,
+                    R.drawable.ic_list_right_feature
+                )
+            )
+            ivRightFun.onContinuousClick {
+                onRightIconClickListener?.invoke()
+            }
             setRightTitleContent(attr.getString(R.styleable.ToolbarLayout_right_title_content))
             setTitleContent(attr.getString(R.styleable.ToolbarLayout_title_content))
         }
@@ -131,5 +149,22 @@ class ToolbarLayout constructor(
         mBinding.apply {
             tvTitle.text = content
         }
+    }
+
+
+    /**
+     * 设置右边图标是否可见
+     * @param isVisible 可见性
+     */
+    fun setRightIconVisibility(isVisible: Boolean) {
+        mBinding.ivRightFun.isVisible = isVisible
+    }
+
+    /**
+     * 设置右边图标资源
+     * @param resId 图片资源id
+     */
+    fun setRightIconRes(@DrawableRes resId: Int) {
+        mBinding.ivRightFun.setImageResource(resId)
     }
 }
