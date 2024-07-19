@@ -312,13 +312,13 @@ class InputLayout(
                     isShowSearchBox = isShowSearchBox
                 ).apply {
                     onChooseClickListener = { bottomListEntity ->
-                        onEntityChangeListener?.invoke(bottomListEntity.data)
-                        onEntityIdChangeListener?.invoke(bottomListEntity.id)
                         if (bottomListEntity.id == SELECT_OTHER_ITEM) {
                             showBottomDialog(manager, isShowSearchBox)
                         } else {
                             setSelectText(bottomListEntity.name, bottomListEntity.id)
                         }
+                        onEntityChangeListener?.invoke(bottomListEntity.data)
+                        onEntityIdChangeListener?.invoke(bottomListEntity.id)
                     }
                 }.show(it)
             }
