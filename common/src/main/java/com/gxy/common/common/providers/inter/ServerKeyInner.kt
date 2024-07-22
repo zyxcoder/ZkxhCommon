@@ -11,4 +11,5 @@ interface ServerKeyInner {
     fun getServerKey(): String?
     fun getServerValue(): Any?
     fun getUUid(): String = UUID.randomUUID().toString() // 自动生成唯一标识符
+    fun getVisible(): Boolean = true//交由模版自己实现，是否可见
 }
