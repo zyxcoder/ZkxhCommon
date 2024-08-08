@@ -31,18 +31,37 @@
         android:textColor="@color/ps_color_53575e"
         android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/video_line"
+
+    <View
+        android:id="@+id/pdf_top_line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_below="@id/ps_tv_video"
         android:background="@color/ps_color_e" />
 
     <TextView
+        android:id="@+id/ps_tv_pdf"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/pdf_top_line"
+        android:background="@drawable/ps_item_select_bg"
+        android:gravity="center"
+        android:text="pdf文件"
+        android:textColor="@color/ps_color_53575e"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/video_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/ps_tv_pdf"
+        android:background="@color/ps_color_e" />
+
+    <TextView
         android:id="@+id/bottom_line"
         android:layout_width="match_parent"
         android:layout_height="6dp"
-        android:layout_below="@id/video_line"
+        android:layout_below="@id/ps_tv_pdf"
         android:background="@color/ps_color_e" />
 
     <TextView

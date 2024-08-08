@@ -6,6 +6,9 @@ import android.content.Context
 import android.graphics.Color
 import android.view.ViewGroup
 import com.bigkoo.pickerview.builder.TimePickerBuilder
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
 import java.util.Calendar
 import java.util.Date
 
@@ -137,4 +140,24 @@ fun Context.copyText(text: String) {
     (getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager)?.setPrimaryClip(
         ClipData.newPlainText("text", text)
     )
+}
+
+/**
+ * 创建pdf临时文件
+ */
+fun Context.createTempFileFromInputStream(inputStream: InputStream?): File? {
+    var tempFile: File? = null
+    try {
+        tempFile = File.createTempFile("temp", ".pdf", cacheDir)
+        val outputStream = FileOutputStream(tempFile)
+        val buffer = ByteArray(8 * 1024)
+        var bytesRead: Int
+        while ((inputStream!!.read(buffer).also { bytesRead = it }) != -1) {
+            outputStream.write(buffer, 0, bytesRead)
+        }
+        outputStream.close()
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+    return tempFile
 }

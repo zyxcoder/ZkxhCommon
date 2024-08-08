@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.gxy.common.R;
-import com.luck.picture.lib.dialog.PhotoItemSelectedDialog;
 import com.luck.picture.lib.interfaces.OnItemClickListener;
 import com.luck.picture.lib.utils.DensityUtil;
 
@@ -30,16 +29,22 @@ import com.luck.picture.lib.utils.DensityUtil;
 public class PhotoSelectedDialog extends DialogFragment implements View.OnClickListener {
     public static final int TAKE_PICTURE_TYPE = 0;
     public static final int PHOTO_ALBUM_TYPE = 1;
+    public static final int PDF_TYPE = 2;
     private boolean isCancel = true;
 
-    public static PhotoItemSelectedDialog newInstance() {
-        return new PhotoItemSelectedDialog();
+    public static final String IS_SHOW_PDF_SELECT = "is_show_pdf_select";
+
+    public static PhotoSelectedDialog newInstance(Boolean isShowPdfSelect) {
+        PhotoSelectedDialog photoItemSelectedDialog = new PhotoSelectedDialog();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(IS_SHOW_PDF_SELECT, isShowPdfSelect);
+        photoItemSelectedDialog.setArguments(bundle);
+        return photoItemSelectedDialog;
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (getDialog() != null) {
             getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
             if (getDialog().getWindow() != null) {
@@ -54,10 +59,20 @@ public class PhotoSelectedDialog extends DialogFragment implements View.OnClickL
         super.onViewCreated(view, savedInstanceState);
         TextView tvPicturePhoto = view.findViewById(R.id.ps_tv_photo);
         TextView tvPictureVideo = view.findViewById(R.id.ps_tv_video);
+        TextView tvPDF = view.findViewById(R.id.ps_tv_pdf);
+        View pdfLine = view.findViewById(R.id.pdf_top_line);
         TextView tvPictureCancel = view.findViewById(R.id.ps_tv_cancel);
         tvPictureVideo.setOnClickListener(this);
         tvPicturePhoto.setOnClickListener(this);
+        tvPDF.setOnClickListener(this);
         tvPictureCancel.setOnClickListener(this);
+        if (getArguments() != null && !getArguments().getBoolean(IS_SHOW_PDF_SELECT, false)) {
+            tvPDF.setVisibility(View.GONE);
+            pdfLine.setVisibility(View.GONE);
+        } else {
+            tvPDF.setVisibility(View.VISIBLE);
+            pdfLine.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -107,6 +122,9 @@ public class PhotoSelectedDialog extends DialogFragment implements View.OnClickL
             } else if (id == R.id.ps_tv_video) {
                 onItemClickListener.onItemClick(v, PHOTO_ALBUM_TYPE);
                 isCancel = false;
+            } else if (id == R.id.ps_tv_pdf) {
+                onItemClickListener.onItemClick(v, PDF_TYPE);
+                isCancel = false;
             }
         }
         dismissAllowingStateLoss();
@@ -127,3 +145,4 @@ public class PhotoSelectedDialog extends DialogFragment implements View.OnClickL
         }
     }
 }
+
