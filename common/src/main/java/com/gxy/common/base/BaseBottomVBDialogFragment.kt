@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -37,7 +38,55 @@ abstract class BaseBottomVBDialogFragment<VM : BaseViewModel, VB : ViewBinding> 
      */
     private fun initDataBind(inflater: LayoutInflater, container: ViewGroup?): View {
         _binding = inflateBindingWithBottomVBDialogFragmentGeneric(inflater, container, false)
-        return mViewBind.root
+
+        return if (enableBlackBars()) {
+            val rootView = mViewBind.root
+            val screenWidth = resources.displayMetrics.widthPixels
+            val screenHeight = resources.displayMetrics.heightPixels
+            val screenAspectRatio = screenWidth.toFloat() / screenHeight
+
+
+            val mContext = context
+            // 只在横屏且屏幕比例大于原始比例时添加黑边
+            if (screenAspectRatio > originalAspectRatio() && mContext != null) {
+                // 计算内容区域的宽度（保持原始比例）
+                val contentWidth = (screenHeight * originalAspectRatio()).toInt()
+
+                // 计算左右黑边大小
+                val sideMargin = (screenWidth - contentWidth) / 2
+
+                // 创建新的根布局
+                val newRoot = FrameLayout(mContext)
+                newRoot.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+                newRoot.setBackgroundColor(blackBarsColor())
+
+                // 创建内容容器
+                val contentContainer = FrameLayout(mContext)
+                val params = FrameLayout.LayoutParams(
+                    contentWidth,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+                params.setMargins(sideMargin, 0, sideMargin, 0)
+                contentContainer.layoutParams = params
+
+                // 移动原始内容到新容器
+                contentContainer.addView(rootView)
+
+                // 组装新布局
+                newRoot.addView(contentContainer)
+
+                newRoot
+
+            } else {
+                rootView
+            }
+
+        } else {
+            mViewBind.root
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +126,8 @@ abstract class BaseBottomVBDialogFragment<VM : BaseViewModel, VB : ViewBinding> 
             height = if (resetDialogHeightPercent() == 0f) {
                 ViewGroup.LayoutParams.MATCH_PARENT
             } else {
-                ((context?.getScreenHeight() ?: 0) * resetDialogHeightPercent()).toInt()
+                ((context?.getScreenHeight()
+                    ?: 0) * resetDialogHeightPercent() * originalAspectRatio()).toInt()
             }
         }
     }
@@ -152,4 +202,20 @@ abstract class BaseBottomVBDialogFragment<VM : BaseViewModel, VB : ViewBinding> 
         } catch (e: Exception) {
         }
     }
+
+
+    /**
+     * 是否启用黑边适配（保持原始比例）
+     */
+    open fun enableBlackBars() = true
+
+    /**
+     * 原始屏幕比例（竖屏比例）
+     */
+    open fun originalAspectRatio() = 9f / 16f  // 1080x1920 = 9:16
+
+    /**
+     * 黑边背景颜色
+     */
+    open fun blackBarsColor() = 0xFF000000.toInt()  // 纯黑色
 }
