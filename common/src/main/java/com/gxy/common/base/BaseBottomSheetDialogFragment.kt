@@ -114,13 +114,15 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding> : BottomSheetDial
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
         behavior.isHideable = couldScrollDownClose()
         resetPeekHeight()?.let { behavior.peekHeight = it }
-
+        val screenWidth = resources.displayMetrics.widthPixels
+        val screenHeight = resources.displayMetrics.heightPixels
+        val screenAspectRatio = screenWidth.toFloat() / screenHeight
         bottomSheet.updateLayoutParams<ViewGroup.LayoutParams> {
             height = if (resetDialogHeightPercent() == 0f) {
                 ViewGroup.LayoutParams.MATCH_PARENT
             } else {
                 ((context?.getScreenHeight()
-                    ?: 0) * resetDialogHeightPercent() * originalAspectRatio()).toInt()
+                    ?: 0) * resetDialogHeightPercent() * if (screenAspectRatio > originalAspectRatio()) originalAspectRatio() else 1F).toInt()
             }
         }
     }
