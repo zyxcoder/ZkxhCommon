@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
 import android.view.ViewGroup
+import androidx.core.view.updateLayoutParams
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import java.io.File
 import java.io.FileOutputStream
@@ -52,6 +53,13 @@ fun Context.showAllTimePicker(
         .isDialog(false)//是否显示为对话框样式
         .setDecorView(viewGroup)
         .build().apply {
+            val originalAspectRatio = 9f / 16f  // 1080x1920 = 9:16
+            val contentWidth = (resources.displayMetrics.heightPixels * originalAspectRatio).toInt()
+            val sideMargin = (resources.displayMetrics.widthPixels - contentWidth) / 2
+            dialogContainerLayout.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                leftMargin = sideMargin
+                rightMargin = sideMargin
+            }
             setKeyBackCancelable(false)
         }.show()
 }
@@ -92,6 +100,13 @@ fun Context.showDefaultTimePicker(
         .isDialog(false)//是否显示为对话框样式
         .setDecorView(viewGroup)
         .build().apply {
+            val originalAspectRatio = 9f / 16f  // 1080x1920 = 9:16
+            val contentWidth = (resources.displayMetrics.heightPixels * originalAspectRatio).toInt()
+            val sideMargin = (resources.displayMetrics.widthPixels - contentWidth) / 2
+            dialogContainerLayout.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                leftMargin = sideMargin
+                rightMargin = sideMargin
+            }
             setKeyBackCancelable(false)
         }.show()
 }
@@ -128,6 +143,13 @@ fun Context.showTimePicker(
         .isDialog(false)//是否显示为对话框样式
         .setDecorView(viewGroup)
         .build().apply {
+            val originalAspectRatio = 9f / 16f  // 1080x1920 = 9:16
+            val contentWidth = (resources.displayMetrics.heightPixels * originalAspectRatio).toInt()
+            val sideMargin = (resources.displayMetrics.widthPixels - contentWidth) / 2
+            dialogContainerLayout.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                leftMargin = sideMargin
+                rightMargin = sideMargin
+            }
             setKeyBackCancelable(false)
         }.show()
 }
