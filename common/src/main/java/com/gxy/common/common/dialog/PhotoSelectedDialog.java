@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.gxy.common.R;
+import com.gxy.common.ext.ViewExtKt;
 import com.luck.picture.lib.interfaces.OnItemClickListener;
 import com.luck.picture.lib.utils.DensityUtil;
 
@@ -51,7 +52,8 @@ public class PhotoSelectedDialog extends DialogFragment implements View.OnClickL
                 getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             }
         }
-        return inflater.inflate(R.layout.dialog_photo_selected, container);
+
+        return ViewExtKt.createPadView(getContext(), inflater.inflate(R.layout.dialog_photo_selected, container));
     }
 
     @Override

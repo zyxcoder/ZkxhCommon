@@ -12,6 +12,7 @@ import com.gxy.common.entity.common.InputItemEntity
 import com.gxy.common.entity.common.InputLayoutType
 import com.gxy.common.entity.common.SelectTimeItemEntity
 import com.gxy.common.entity.common.TxtItemEntity
+import com.gxy.common.ext.PicSelectHelper
 import com.zyxcoder.mvvmroot.ext.showToast
 
 /**
@@ -95,6 +96,9 @@ class Main : BaseTableActivity<MainViewModel, ActivityBaseTableBinding>() {
 
     override var provideUpLoadRightSidePicClickListener: ((data: CardIdItemEntity, ivHodler: ImageView) -> Unit)? =
         { data, ivHodler ->
-            showToast("正面")
+//            showToast("正面")
+            PicSelectHelper {
+
+            }
         }
 }
