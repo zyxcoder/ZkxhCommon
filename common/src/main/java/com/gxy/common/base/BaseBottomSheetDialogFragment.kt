@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.gxy.common.R
+import com.gxy.common.utils.adjustFontSize
 import com.gxy.common.utils.getScreenHeight
 import com.gxy.common.utils.inflateBindingWithBottomSheetDialogFragmentGeneric
 
@@ -34,6 +35,7 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding> : BottomSheetDial
 
         return if (enableBlackBars()) {
             val rootView = mViewBind.root
+            adjustFontSize(rootView)
             val screenWidth = resources.displayMetrics.widthPixels
             val screenHeight = resources.displayMetrics.heightPixels
             val screenAspectRatio = screenWidth.toFloat() / screenHeight
