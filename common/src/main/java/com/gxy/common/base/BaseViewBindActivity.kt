@@ -1,7 +1,6 @@
 package com.gxy.common.base
 
 import android.R
-import android.graphics.Color
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -9,6 +8,7 @@ import androidx.core.view.isNotEmpty
 import androidx.viewbinding.ViewBinding
 import com.gxy.common.ext.dismissLoadingExt
 import com.gxy.common.ext.showLoadingExt
+import com.gxy.common.utils.adjustFontSize
 import com.gyf.immersionbar.ImmersionBar
 import com.zyxcoder.mvvmroot.base.activity.BaseVmVbActivity
 import com.zyxcoder.mvvmroot.base.viewmodel.BaseViewModel
@@ -94,6 +94,7 @@ abstract class BaseViewBindActivity<VM : BaseViewModel, VB : ViewBinding> :
      */
     private fun applyBlackBars() {
         val rootView = window.decorView.findViewById<ViewGroup>(R.id.content)
+        adjustFontSize(rootView)
         val screenWidth = resources.displayMetrics.widthPixels
         val screenHeight = resources.displayMetrics.heightPixels
         val screenAspectRatio = screenWidth.toFloat() / screenHeight
