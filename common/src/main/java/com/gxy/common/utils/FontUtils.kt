@@ -20,6 +20,6 @@ fun adjustFontSize(view: View?) {
         val tv = view
         val originalSizeSp =
             tv.getTextSize() / tv.getResources().getDisplayMetrics().scaledDensity
-        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, originalSizeSp + 5) // +5sp
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, originalSizeSp + 10) // +5sp
     }
 }
