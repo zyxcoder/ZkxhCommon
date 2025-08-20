@@ -9,9 +9,12 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import com.gxy.common.R
 import com.gxy.common.databinding.ViewToolbarBinding
+import com.gxy.common.utils.GlobalFontScale
 import com.zyxcoder.mvvmroot.ext.onContinuousClick
+import com.zyxcoder.mvvmroot.utils.dpToPx
 
 /**
  * @author zhangyuxiang
@@ -39,6 +42,9 @@ class ToolbarLayout constructor(
                     ContextCompat.getColor(context, R.color.transparent)
                 )
             )
+            toolbar.updateLayoutParams {
+                height = (dpToPx(97f) * GlobalFontScale.scale).toInt()
+            }
 
             tvTitle.setOnClickListener {
                 onTitleClickListener?.invoke()

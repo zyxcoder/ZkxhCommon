@@ -14,10 +14,11 @@ import com.google.android.material.tabs.TabLayout.MODE_FIXED
 import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
 import com.google.android.material.tabs.TabLayout.Mode
 import com.gxy.common.R
-import com.gxy.common.databinding.ActivityBaseCommonListBinding
-import com.gxy.common.databinding.ItemTabCenterTextBinding
 import com.gxy.common.base.BaseViewBindActivity
 import com.gxy.common.common.adapter.SimpleFragmentPagerAdapter
+import com.gxy.common.databinding.ActivityBaseCommonListBinding
+import com.gxy.common.databinding.ItemTabCenterTextBinding
+import com.gxy.common.utils.GlobalFontScale
 import com.gxy.common.utils.getScreenWidth
 import com.zyxcoder.mvvmroot.utils.dpToPx
 
@@ -144,6 +145,9 @@ abstract class BaseCommonListActivity<VM : BaseCommonListActivityViewModel, VB :
             }
             viewPager.setCanScroll(provideViewPagerCanScroll())
             clTab.isVisible = fragments.size > 1
+            clTab.updateLayoutParams {
+                height = (dpToPx(47f) * GlobalFontScale.scale).toInt()
+            }
             tabLayout.apply {
                 tabMode = provideTabMode
                 setupWithViewPager(viewPager.apply {
