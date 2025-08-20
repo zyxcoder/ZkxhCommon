@@ -42,9 +42,9 @@ class ToolbarLayout constructor(
                     ContextCompat.getColor(context, R.color.transparent)
                 )
             )
-            toolbar.updateLayoutParams {
-                height = (dpToPx(97f) * GlobalFontScale.scale).toInt()
-            }
+//            toolbar.updateLayoutParams {
+//                height = (dpToPx(97f) * GlobalFontScale.scale).toInt()
+//            }
 
             tvTitle.setOnClickListener {
                 onTitleClickListener?.invoke()
