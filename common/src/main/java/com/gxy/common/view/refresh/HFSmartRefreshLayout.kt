@@ -36,7 +36,9 @@ class HFSmartRefreshLayout(
                     backgroundColor
                 )
             })
-            setHeaderHeight(150f)
+            setTextSizeTitle(8F)
+            setTextSizeTime(8F)
+            setHeaderHeight(250f)
             setProgressDrawable(resources.getDrawable(R.drawable.ic_refresh_progress).apply {
                 setTint(
                     backgroundColor
