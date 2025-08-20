@@ -1,6 +1,7 @@
 package com.gxy.common.base
 
 import android.R
+import android.content.Context
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -8,6 +9,7 @@ import androidx.core.view.isNotEmpty
 import androidx.viewbinding.ViewBinding
 import com.gxy.common.ext.dismissLoadingExt
 import com.gxy.common.ext.showLoadingExt
+import com.gxy.common.utils.ContextUtils
 import com.gxy.common.utils.adjustFontSize
 import com.gyf.immersionbar.ImmersionBar
 import com.zyxcoder.mvvmroot.base.activity.BaseVmVbActivity
@@ -79,6 +81,9 @@ abstract class BaseViewBindActivity<VM : BaseViewModel, VB : ViewBinding> :
      */
     open fun blackBarsColor() = 0xFF000000.toInt()  // 纯黑色
 
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(ContextUtils.wrap(base))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
