@@ -36,6 +36,7 @@ class HFSmartRefreshLayout(
                     backgroundColor
                 )
             })
+            setHeaderHeight(150f)
             setProgressDrawable(resources.getDrawable(R.drawable.ic_refresh_progress).apply {
                 setTint(
                     backgroundColor
