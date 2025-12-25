@@ -22,7 +22,7 @@ class BottomListAdapter : BaseViewBindingAdapter<BottomListEntity, ItemBottomSel
     ) {
         holder.viewBind.apply {
             tvContent.text = item.name
-            if (item.id == null || item.id < 0 || !item.isCanClick) {
+            if (item.id == null || !item.isCanClick) {
                 tvContent.setTextColor(
                     ContextCompat.getColor(
                         context,
